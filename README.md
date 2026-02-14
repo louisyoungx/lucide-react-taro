@@ -80,15 +80,37 @@ import { House, Settings, User, Camera, Zap } from 'lucide-react-taro';
 # 安装依赖
 npm install
 
-# 拉取最新 Lucide 图标
-npm run fetch-icons
-
-# 生成图标模块
-npm run generate
-
 # 完整构建
 npm run build
+
+# 运行测试
+npm test
 ```
+
+### 项目结构
+
+```
+├── src/
+│   ├── Icon.tsx          # 核心图标组件
+│   ├── index.ts          # 导出入口（自动生成）
+│   ├── icons/            # 图标模块（自动生成）
+│   └── __tests__/        # 单元测试
+├── scripts/
+│   ├── fetch-icons.ts    # 拉取 Lucide 图标
+│   └── generate.ts       # 生成图标模块
+└── dist/                 # 构建产物
+```
+
+### 测试
+
+项目使用 [Vitest](https://vitest.dev/) 作为测试框架，测试覆盖率 100%。
+
+测试内容包括：
+- `createIcon` 函数创建和配置
+- 图标组件渲染（尺寸、颜色、样式等）
+- SVG 颜色替换逻辑
+- 缓存机制
+- 工具函数（命名转换、SVG 转义等）
 
 ## License
 
