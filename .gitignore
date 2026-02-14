@@ -4,3 +4,4 @@ src/icons/
 .lucide-cache/
 *.log
 .DS_Store
+coverage/
