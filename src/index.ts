@@ -1,4 +1,4 @@
-export { Icon } from './Icon';
+export { createIcon } from './Icon';
 export type { IconProps } from './Icon';
 
 export { AArrowDown } from './icons/a-arrow-down';

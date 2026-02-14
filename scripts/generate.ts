@@ -24,14 +24,16 @@ function svgToBase64(svgContent: string): string {
 }
 
 function generateIconModule(icon: IconMeta): string {
-  return `export const ${icon.componentName} = "${icon.base64}";
+  return `import { createIcon } from '../Icon';
+
+export const ${icon.componentName} = createIcon("${icon.base64}");
 `;
 }
 
 function generateIndexFile(icons: IconMeta[]): string {
   const exports = icons.map((icon) => `export { ${icon.componentName} } from './icons/${icon.name}';`).join('\n');
 
-  return `export { Icon } from './Icon';
+  return `export { createIcon } from './Icon';
 export type { IconProps } from './Icon';
 
 ${exports}
