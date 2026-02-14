@@ -11,33 +11,8 @@ export interface IconProps extends Omit<ImageProps, 'src' | 'style'> {
   style?: CSSProperties;
 }
 
-const BASE64_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-
-function base64Encode(str: string): string {
-  const bytes: number[] = [];
-  for (let i = 0; i < str.length; i++) {
-    bytes.push(str.charCodeAt(i));
-  }
-
-  let result = '';
-  const len = bytes.length;
-
-  for (let i = 0; i < len; i += 3) {
-    const b1 = bytes[i];
-    const b2 = i + 1 < len ? bytes[i + 1] : 0;
-    const b3 = i + 2 < len ? bytes[i + 2] : 0;
-
-    result += BASE64_CHARS[b1 >> 2];
-    result += BASE64_CHARS[((b1 & 3) << 4) | (b2 >> 4)];
-    result += i + 1 < len ? BASE64_CHARS[((b2 & 15) << 2) | (b3 >> 6)] : '=';
-    result += i + 2 < len ? BASE64_CHARS[b3 & 63] : '=';
-  }
-
-  return result;
-}
-
 function svgToDataUrl(svg: string): string {
-  return `data:image/svg+xml;base64,${base64Encode(svg)}`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 }
 
 const svgCache = new Map<string, string>();
