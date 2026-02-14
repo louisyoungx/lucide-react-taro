@@ -1,5 +1,9 @@
 # lucide-react-taro
 
+[![npm version](https://img.shields.io/npm/v/lucide-react-taro.svg)](https://www.npmjs.com/package/lucide-react-taro)
+[![npm downloads](https://img.shields.io/npm/dm/lucide-react-taro.svg)](https://www.npmjs.com/package/lucide-react-taro)
+[![license](https://img.shields.io/npm/l/lucide-react-taro.svg)](https://github.com/louisyoungx/lucide-react-taro/blob/main/LICENSE)
+
 在 Taro 小程序中使用 [Lucide](https://lucide.dev/) 图标的高性能解决方案。
 
 ## AI 助手接入
@@ -101,19 +105,8 @@ npm test
 └── dist/                 # 构建产物
 ```
 
-### 测试
-
-项目使用 [Vitest](https://vitest.dev/) 作为测试框架，测试覆盖率 100%。
-
-测试内容包括：
-- `createIcon` 函数创建和配置
-- 图标组件渲染（尺寸、颜色、样式等）
-- SVG 颜色替换逻辑
-- 缓存机制
-- 工具函数（命名转换、SVG 转义等）
-
 ## License
 
-ISC
+ISC + MIT (与 Lucide LICENSE 保持一致)
 
 图标版权归 [Lucide](https://github.com/lucide-icons/lucide) 所有。

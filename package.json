@@ -1,6 +1,6 @@
 {
   "name": "lucide-react-taro",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Lucide icons for Taro with dynamic color support, tree shaking, and WeChat miniprogram compatibility",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -50,11 +50,11 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/louisyoungx/lucide-react-taro.git"
   },
-  "homepage": "",
+  "homepage": "https://github.com/louisyoungx/lucide-react-taro#readme",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/louisyoungx/lucide-react-taro/issues"
   },
   "peerDependencies": {
     "@tarojs/components": ">=3.0.0",
