@@ -2,6 +2,12 @@
 
 在 Taro 小程序中使用 [Lucide](https://lucide.dev/) 图标的高性能解决方案。
 
+## AI 助手接入
+
+本项目提供了 [SKILL.md](https://github.com/louisyoungx/lucide-react-taro/blob/main/SKILL.md) 文件，方便 AI 助手（如 Claude、Cursor 等）快速了解如何使用本库。
+
+你可以将 SKILL.md 的内容提供给 AI 助手，或者直接引用该文件链接，让 AI 更准确地帮助你在 Taro 项目中集成 Lucide 图标。
+
 ## 特性
 
 - **动态颜色支持**：运行时动态修改图标颜色
