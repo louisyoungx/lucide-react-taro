@@ -45,8 +45,14 @@ import { House, Settings, User, Camera, Zap } from 'lucide-react-taro';
 // 组合使用
 <User size={48} color="#ff3e98" strokeWidth={1.5} />
 
+// 自定义 className
+<User className="my-icon" />
+
 // 自定义样式
 <User size={24} style={{ marginRight: 8 }} />
+
+// className 和 style 组合使用
+<User className="my-icon" style={{ marginRight: 8 }} />
 ```
 
 ## API
@@ -57,6 +63,7 @@ import { House, Settings, User, Camera, Zap } from 'lucide-react-taro';
 | color               | string           | 'currentColor' | 图标颜色                               |
 | strokeWidth         | number \| string | 2              | 描边宽度                               |
 | absoluteStrokeWidth | boolean          | false          | 绝对描边宽度，启用后描边不随 size 缩放 |
+| className           | string           | -              | CSS 类名                               |
 | style               | CSSProperties    | -              | 自定义样式                             |
 
 同时支持 Taro `Image` 组件的其他属性。
