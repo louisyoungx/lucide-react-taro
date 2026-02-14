@@ -1,0 +1,6 @@
+node_modules/
+dist/
+src/icons/
+.lucide-cache/
+*.log
+.DS_Store

@@ -1,0 +1,58 @@
+{
+  "name": "lucide-react-taro",
+  "version": "1.0.0",
+  "description": "Lucide icons for Taro with pre-compiled Base64 SVGs, supporting tree shaking",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./icons/*": {
+      "import": "./dist/esm/icons/*.js",
+      "require": "./dist/cjs/icons/*.js",
+      "types": "./dist/types/icons/*.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "fetch-icons": "tsx scripts/fetch-icons.ts",
+    "generate": "tsx scripts/generate.ts",
+    "build:icons": "npm run fetch-icons && npm run generate",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build": "npm run build:icons && npm run build:esm && npm run build:cjs",
+    "clean": "rm -rf dist src/icons",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "lucide",
+    "icons",
+    "taro",
+    "react",
+    "miniprogram",
+    "wechat",
+    "base64",
+    "svg"
+  ],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "@tarojs/components": ">=4.0.0",
+    "react": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@tarojs/components": "4.1.9",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "react": "^18.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.4.5"
+  }
+}
