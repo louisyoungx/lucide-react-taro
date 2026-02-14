@@ -8,7 +8,7 @@ const OUTPUT_DIR = path.join(process.cwd(), 'src', 'icons');
 interface IconMeta {
   name: string;
   componentName: string;
-  base64: string;
+  svgContent: string;
 }
 
 function kebabToPascal(str: string): string {
@@ -18,15 +18,21 @@ function kebabToPascal(str: string): string {
     .join('');
 }
 
-function svgToBase64(svgContent: string): string {
-  const encoded = Buffer.from(svgContent, 'utf-8').toString('base64');
-  return `data:image/svg+xml;base64,${encoded}`;
+function escapeSvgForJs(svgContent: string): string {
+  return svgContent
+    .replace(/\\/g, '\\\\')
+    .replace(/"/g, '\\"')
+    .replace(/\n/g, '')
+    .replace(/\r/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function generateIconModule(icon: IconMeta): string {
+  const escaped = escapeSvgForJs(icon.svgContent);
   return `import { createIcon } from '../Icon';
 
-export const ${icon.componentName} = createIcon("${icon.base64}");
+export const ${icon.componentName} = createIcon("${escaped}", "${icon.componentName}");
 `;
 }
 
@@ -60,11 +66,10 @@ async function generate() {
     const componentName = kebabToPascal(name);
     const svgPath = path.join(ICONS_SOURCE_DIR, file);
     const svgContent = fs.readFileSync(svgPath, 'utf-8');
-    const base64 = svgToBase64(svgContent);
 
-    icons.push({ name, componentName, base64 });
+    icons.push({ name, componentName, svgContent });
 
-    const moduleContent = generateIconModule({ name, componentName, base64 });
+    const moduleContent = generateIconModule({ name, componentName, svgContent });
     fs.writeFileSync(path.join(OUTPUT_DIR, `${name}.ts`), moduleContent);
   }
 
