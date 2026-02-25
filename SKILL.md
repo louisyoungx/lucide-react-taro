@@ -103,7 +103,7 @@ import { House } from 'lucide-react-taro/icons/house';
 npx taro-lucide-tabbar House Settings User -c "#999999" -a "#1890ff"
 
 # 指定输出目录和尺寸
-npx taro-lucide-tabbar House -c "#999999" -a "#1890ff" -o ./src/assets/tabbar -s 81
+npx taro-lucide-tabbar House Settings User -c "#999999" -a "#1890ff" -o ./src/assets/tabbar -s 81
 ```
 
 ### CLI 参数
@@ -119,12 +119,28 @@ npx taro-lucide-tabbar House -c "#999999" -a "#1890ff" -o ./src/assets/tabbar -s
 ```ts
 export default defineAppConfig({
   tabBar: {
+    color: '#999999',
+    selectedColor: '#1890ff',
+    backgroundColor: '#ffffff',
+    borderStyle: 'black',
     list: [
       {
         pagePath: 'pages/index/index',
         text: '首页',
-        iconPath: 'assets/tabbar/house.png',
-        selectedIconPath: 'assets/tabbar/house-active.png',
+        iconPath: './assets/tabbar/house.png',
+        selectedIconPath: './assets/tabbar/house-active.png',
+      },
+      {
+        pagePath: 'pages/settings/index',
+        text: '设置',
+        iconPath: './assets/tabbar/settings.png',
+        selectedIconPath: './assets/tabbar/settings-active.png',
+      },
+      {
+        pagePath: 'pages/user/index',
+        text: '用户',
+        iconPath: './assets/tabbar/user.png',
+        selectedIconPath: './assets/tabbar/user-active.png',
       },
     ],
   },
