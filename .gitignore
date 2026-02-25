@@ -5,3 +5,5 @@ src/icons/
 *.log
 .DS_Store
 coverage/
+.trae
+cli-e2e-output

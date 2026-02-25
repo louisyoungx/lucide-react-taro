@@ -6,7 +6,7 @@
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
   "bin": {
-    "lucide-react-taro": "./dist/cjs/cli/index.js"
+    "taro-lucide-tabbar": "./dist/cjs/cli/index.js"
   },
   "sideEffects": false,
   "exports": {

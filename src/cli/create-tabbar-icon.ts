@@ -1,4 +1,3 @@
-import { Command } from 'commander';
 import * as path from 'path';
 import sharp from 'sharp';
 import {
@@ -136,14 +135,14 @@ function validateOptions(options: CreateTabbarIconOptions): { valid: boolean; er
   return { valid: errors.length === 0, errors };
 }
 
-async function createTabbarIcon(icons: string[], options: CreateTabbarIconOptions): Promise<void> {
+export async function createTabbarIcon(icons: string[], options: CreateTabbarIconOptions): Promise<void> {
   if (icons.length === 0) {
     console.error('Error: No icons specified.');
     console.error('');
-    console.error('Usage: lucide-react-taro create-tabbar-icon <icons...> [options]');
+    console.error('Usage: taro-lucide-tabbar <icons...> [options]');
     console.error('');
     console.error('Example:');
-    console.error('  lucide-react-taro create-tabbar-icon House Settings User -c "#999" -a "#1890ff"');
+    console.error('  taro-lucide-tabbar House Settings User -c "#999" -a "#1890ff"');
     console.error('');
     console.error('Available icons: https://lucide.dev/icons');
     process.exit(1);
@@ -203,12 +202,4 @@ async function createTabbarIcon(icons: string[], options: CreateTabbarIconOption
   }
 }
 
-export const createTabbarIconCommand = new Command('create-tabbar-icon')
-  .description('Generate PNG icons for WeChat miniprogram tabbar')
-  .argument('<icons...>', 'Icon names (e.g., House Settings User)')
-  .option('-c, --color <color>', 'Icon color (hex, rgb, rgba, or named)', '#000000')
-  .option('-a, --active-color <color>', 'Active state icon color')
-  .option('-s, --size <size>', 'Icon size in pixels, 16-1024 (recommended: 81)', '81')
-  .option('-o, --output <dir>', 'Output directory', './tabbar-icons')
-  .option('--stroke-width <width>', 'Stroke width, 0.5-5 (default: 2)', '2')
-  .action(createTabbarIcon);
+
