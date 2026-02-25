@@ -4,7 +4,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/lucide-react-taro.svg)](https://www.npmjs.com/package/lucide-react-taro)
 [![license](https://img.shields.io/npm/l/lucide-react-taro.svg)](https://github.com/louisyoungx/lucide-react-taro/blob/main/LICENSE)
 
-在 Taro 小程序中使用 [Lucide](https://lucide.dev/) 图标的高性能解决方案。
+在 Taro 小程序中使用 [Lucide](https://lucide.dev/) 图标的高性能解决方案，提供图标组件和 TabBar PNG 图标生成 CLI 工具。
 
 ## AI 助手接入
 

@@ -48,14 +48,12 @@ function MyComponent() {
 
 ## Props
 
-| 属性                | 类型             | 默认值         | 说明                                   |
-| ------------------- | ---------------- | -------------- | -------------------------------------- |
-| size                | number \| string | 24             | 图标尺寸                               |
-| color               | string           | 'currentColor' | 图标颜色                               |
-| strokeWidth         | number \| string | 2              | 描边宽度                               |
-| absoluteStrokeWidth | boolean          | false          | 绝对描边宽度，启用后描边不随 size 缩放 |
-| className           | string           | -              | CSS 类名                               |
-| style               | CSSProperties    | -              | 内联样式                               |
+- `size` (number | string, 默认 24): 图标尺寸
+- `color` (string, 默认 'currentColor'): 图标颜色
+- `strokeWidth` (number | string, 默认 2): 描边宽度
+- `absoluteStrokeWidth` (boolean, 默认 false): 绝对描边宽度，启用后描边不随 size 缩放
+- `className` (string): CSS 类名
+- `style` (CSSProperties): 内联样式
 
 同时支持 Taro `Image` 组件的其他属性。
 
@@ -110,13 +108,11 @@ npx lucide-react-taro create-tabbar-icon House -c "#999999" -a "#1890ff" -o ./sr
 
 ### CLI 参数
 
-| 参数             | 简写 | 默认值           | 说明         |
-| ---------------- | ---- | ---------------- | ------------ |
-| `--color`        | `-c` | `#000000`        | 图标颜色     |
-| `--active-color` | `-a` | -                | 选中状态颜色 |
-| `--size`         | `-s` | `81`             | 图标尺寸     |
-| `--output`       | `-o` | `./tabbar-icons` | 输出目录     |
-| `--stroke-width` | -    | `2`              | 描边宽度     |
+- `--color`, `-c` (默认 #000000): 图标颜色
+- `--active-color`, `-a`: 选中状态颜色
+- `--size`, `-s` (默认 81): 图标尺寸
+- `--output`, `-o` (默认 ./tabbar-icons): 输出目录
+- `--stroke-width` (默认 2): 描边宽度
 
 ### 在 app.config.ts 中使用
 
