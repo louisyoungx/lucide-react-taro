@@ -100,10 +100,10 @@ import { House } from 'lucide-react-taro/icons/house';
 
 ```bash
 # 生成带选中状态的图标
-npx lucide-react-taro create-tabbar-icon House Settings User -c "#999999" -a "#1890ff"
+npx taro-lucide-tabbar House Settings User -c "#999999" -a "#1890ff"
 
 # 指定输出目录和尺寸
-npx lucide-react-taro create-tabbar-icon House -c "#999999" -a "#1890ff" -o ./src/assets/tabbar -s 81
+npx taro-lucide-tabbar House -c "#999999" -a "#1890ff" -o ./src/assets/tabbar -s 81
 ```
 
 ### CLI 参数

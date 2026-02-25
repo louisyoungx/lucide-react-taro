@@ -86,23 +86,20 @@ import { House, Settings, User, Camera, Zap } from 'lucide-react-taro';
 ### 生成 TabBar 图标
 
 ```bash
-# 首先确保已下载图标资源
-npm run fetch-icons
-
 # 生成单个图标
-npx lucide-react-taro create-tabbar-icon House -c "#999999"
+npx taro-lucide-tabbar House -c "#999999"
 
 # 生成带选中状态的图标（推荐）
-npx lucide-react-taro create-tabbar-icon House -c "#999999" -a "#1890ff"
+npx taro-lucide-tabbar House -c "#999999" -a "#1890ff"
 
 # 批量生成多个图标
-npx lucide-react-taro create-tabbar-icon House Settings User -c "#999999" -a "#1890ff"
+npx taro-lucide-tabbar House Settings User -c "#999999" -a "#1890ff"
 
 # 指定输出目录
-npx lucide-react-taro create-tabbar-icon House -c "#999999" -o ./src/assets/tabbar
+npx taro-lucide-tabbar House -c "#999999" -o ./src/assets/tabbar
 
 # 指定尺寸（小程序推荐 81x81）
-npx lucide-react-taro create-tabbar-icon House -c "#999999" -s 81
+npx taro-lucide-tabbar House -c "#999999" -s 81
 ```
 
 ### CLI 参数
