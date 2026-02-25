@@ -48,14 +48,14 @@ function MyComponent() {
 
 ## Props
 
-| 属性                | 类型              | 默认值           | 说明                                     |
-| ------------------- | ----------------- | ---------------- | ---------------------------------------- |
-| size                | number \| string  | 24               | 图标尺寸                                 |
-| color               | string            | 'currentColor'   | 图标颜色                                 |
-| strokeWidth         | number \| string  | 2                | 描边宽度                                 |
-| absoluteStrokeWidth | boolean           | false            | 绝对描边宽度，启用后描边不随 size 缩放   |
-| className           | string            | -                | CSS 类名                                 |
-| style               | CSSProperties     | -                | 内联样式                                 |
+| 属性                | 类型             | 默认值         | 说明                                   |
+| ------------------- | ---------------- | -------------- | -------------------------------------- |
+| size                | number \| string | 24             | 图标尺寸                               |
+| color               | string           | 'currentColor' | 图标颜色                               |
+| strokeWidth         | number \| string | 2              | 描边宽度                               |
+| absoluteStrokeWidth | boolean          | false          | 绝对描边宽度，启用后描边不随 size 缩放 |
+| className           | string           | -              | CSS 类名                               |
+| style               | CSSProperties    | -              | 内联样式                               |
 
 同时支持 Taro `Image` 组件的其他属性。
 
@@ -94,6 +94,47 @@ import { House } from 'lucide-react-taro/icons/house';
 - `Download` - 下载
 - `Upload` - 上传
 
+## CLI 工具：生成 TabBar 图标
+
+微信小程序的 TabBar 不支持 base64 或 SVG 图片，只能使用本地 PNG 文件。本库提供了 CLI 工具来生成 TabBar 所需的 PNG 图标。
+
+### 使用方法
+
+```bash
+# 生成带选中状态的图标
+npx lucide-react-taro create-tabbar-icon House Settings User -c "#999999" -a "#1890ff"
+
+# 指定输出目录和尺寸
+npx lucide-react-taro create-tabbar-icon House -c "#999999" -a "#1890ff" -o ./src/assets/tabbar -s 81
+```
+
+### CLI 参数
+
+| 参数             | 简写 | 默认值           | 说明         |
+| ---------------- | ---- | ---------------- | ------------ |
+| `--color`        | `-c` | `#000000`        | 图标颜色     |
+| `--active-color` | `-a` | -                | 选中状态颜色 |
+| `--size`         | `-s` | `81`             | 图标尺寸     |
+| `--output`       | `-o` | `./tabbar-icons` | 输出目录     |
+| `--stroke-width` | -    | `2`              | 描边宽度     |
+
+### 在 app.config.ts 中使用
+
+```ts
+export default defineAppConfig({
+  tabBar: {
+    list: [
+      {
+        pagePath: 'pages/index/index',
+        text: '首页',
+        iconPath: 'assets/tabbar/house.png',
+        selectedIconPath: 'assets/tabbar/house-active.png',
+      },
+    ],
+  },
+});
+```
+
 ## 注意事项
 
 1. **颜色默认值**：默认颜色为 `currentColor`，在小程序 Image 组件中可能不会继承父元素颜色，建议显式设置 `color` 属性。
@@ -101,3 +142,5 @@ import { House } from 'lucide-react-taro/icons/house';
 2. **性能优化**：组件内部已实现 base64 缓存，相同参数组合只计算一次。
 
 3. **兼容性**：已内置 base64 编码 polyfill，无需额外配置即可在微信小程序中使用。
+
+4. **TabBar 图标**：小程序 TabBar 不支持 SVG/base64，请使用 CLI 工具生成 PNG 图标。
