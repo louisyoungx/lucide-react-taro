@@ -8,9 +8,13 @@
 
 ## AI 助手接入
 
-本项目提供了 [SKILL.md](https://github.com/louisyoungx/lucide-react-taro/blob/main/SKILL.md) 文件，方便 AI 助手（如 Claude、Cursor 等）快速了解如何使用本库。
+本项目提供了 [SKILL.md](https://github.com/louisyoungx/lucide-react-taro/blob/main/SKILL.md)，方便 AI 助手快速了解如何使用本库。
 
-你可以将 SKILL.md 的内容提供给 AI 助手，或者直接引用该文件链接，让 AI 更准确地帮助你在 Taro 项目中集成 Lucide 图标。
+也可使用 skills CLI 一键安装到你的 AI 助手
+
+```bash
+npx skills add louisyoungx/lucide-react-taro
+```
 
 ## 特性
 
