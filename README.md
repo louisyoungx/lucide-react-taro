@@ -30,6 +30,16 @@ yarn add lucide-react-taro
 pnpm add lucide-react-taro
 ```
 
+## 引入方式
+
+```tsx
+// ✅ 推荐：主入口导入（已优化打包速度, 支持 tree-shaking）
+import { House, Settings, User } from 'lucide-react-taro';
+
+// 可选：子路径导入（适合只用少量图标的场景）
+import { House } from 'lucide-react-taro/icons/house';
+```
+
 ## 使用
 
 ```tsx

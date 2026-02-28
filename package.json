@@ -1,6 +1,6 @@
 {
   "name": "lucide-react-taro",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Lucide icons for Taro with dynamic color support, tree shaking, and WeChat miniprogram compatibility",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -11,14 +11,14 @@
   "sideEffects": false,
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "types": "./dist/types/index.d.ts"
+      "require": "./dist/cjs/index.js"
     },
     "./icons/*": {
+      "types": "./dist/types/icons/*.d.ts",
       "import": "./dist/esm/icons/*.js",
-      "require": "./dist/cjs/icons/*.js",
-      "types": "./dist/types/icons/*.d.ts"
+      "require": "./dist/cjs/icons/*.js"
     }
   },
   "files": [
@@ -28,9 +28,9 @@
     "fetch-icons": "tsx scripts/fetch-icons.ts",
     "generate": "tsx scripts/generate.ts",
     "build:icons": "npm run fetch-icons && npm run generate",
-    "build:esm": "tsc -p tsconfig.esm.json",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build": "npm run build:icons && npm run build:esm && npm run build:cjs",
+    "build:cli": "tsc -p tsconfig.cli.json",
+    "build:bundle": "tsx scripts/build.ts",
+    "build": "npm run build:icons && npm run build:bundle && npm run build:cli",
     "clean": "rm -rf dist src/icons",
     "prepublishOnly": "npm run build",
     "test": "vitest run",
@@ -71,8 +71,11 @@
     "@types/react": "^18.0.0",
     "@vitejs/plugin-react": "^5.1.4",
     "@vitest/coverage-v8": "^4.0.18",
+    "esbuild": "^0.27.3",
     "jsdom": "^28.0.0",
     "react": "^18.0.0",
+    "rollup": "^4.59.0",
+    "rollup-plugin-dts": "^6.3.0",
     "tsx": "^4.0.0",
     "typescript": "^5.4.5",
     "vitest": "^4.0.18"
