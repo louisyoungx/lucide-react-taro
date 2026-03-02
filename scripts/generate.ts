@@ -32,7 +32,7 @@ function generateIconModule(icon: IconMeta): string {
     const escaped = escapeSvgForJs(icon.svgContent)
     return `import { createIcon } from '../Icon';
 
-export const ${icon.componentName} = createIcon("${escaped}", "${icon.componentName}");
+export const ${icon.componentName} = /*#__PURE__*/ createIcon("${escaped}", "${icon.componentName}");
 `
 }
 
@@ -40,7 +40,7 @@ function generateIndexFile(icons: IconMeta[]): string {
     const iconExports = icons
         .map(icon => {
             const escaped = escapeSvgForJs(icon.svgContent)
-            return `export const ${icon.componentName} = createIcon("${escaped}", "${icon.componentName}");`
+            return `export const ${icon.componentName} = /*#__PURE__*/ createIcon("${escaped}", "${icon.componentName}");`
         })
         .join('\n')
 
