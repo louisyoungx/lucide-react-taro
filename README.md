@@ -1,8 +1,19 @@
-# lucide-react-taro
+<p align="center">
+  <a href="https://github.com/lucide-icons/lucide#gh-light-mode-only">
+    <img src="https://lucide.dev/lucide-logo-repo.svg#gh-light-mode-only" alt="Lucide - Beautiful & consistent icon toolkit made by the community. Open-source project and a fork of Feather Icons." width="480">
+  </a>
+  <a href="https://github.com/lucide-icons/lucide#gh-dark-mode-only">
+    <img src="https://lucide.dev/lucide-logo-repo-dark.svg#gh-dark-mode-only" alt="Lucide - Beautiful & consistent icon toolkit made by the community. Open-source project and a fork of Feather Icons." width="480">
+  </a>
+</p>
 
-[![npm version](https://img.shields.io/npm/v/lucide-react-taro.svg)](https://www.npmjs.com/package/lucide-react-taro)
-[![npm downloads](https://img.shields.io/npm/dm/lucide-react-taro.svg)](https://www.npmjs.com/package/lucide-react-taro)
-[![license](https://img.shields.io/npm/l/lucide-react-taro.svg)](https://github.com/louisyoungx/lucide-react-taro/blob/main/LICENSE)
+<p align="center">
+  <a href="https://github.com/louisyoungx/lucide-react-taro/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/lucide-react-taro" alt="license"></a>
+  <a href="https://www.npmjs.com/package/lucide-react-taro"><img src="https://img.shields.io/npm/v/lucide-react-taro" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/lucide-react-taro"><img src="https://img.shields.io/npm/dm/lucide-react-taro" alt="npm downloads"></a>
+</p>
+
+# Lucide React Taro
 
 在 Taro 小程序中使用 [Lucide](https://lucide.dev/) 图标的高性能解决方案，提供图标组件和 TabBar PNG 图标生成 CLI 工具。
 
