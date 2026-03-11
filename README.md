@@ -172,6 +172,36 @@ export default defineAppConfig({
 });
 ```
 
+### 图标查找工具
+
+本库提供了图标查找工具，支持精确查找、模糊查找和列出所有图标。
+
+```bash
+# 模糊查找（默认）
+npx taro-lucide-find arrow
+
+# 精确查找
+npx taro-lucide-find arrow-up --exact
+
+# 批量验证（输出 JSON，适合 AI 调用）
+npx taro-lucide-find arrow-up user settings arw --json
+
+# 列出所有图标
+npx taro-lucide-find --list
+```
+
+### 图标预览工具
+
+本库提供了终端图标预览工具，支持在命令行直接查看图标样式。
+
+```bash
+# 预览图标
+npx taro-lucide-show ArrowUp
+
+# 自定义大小和颜色
+npx taro-lucide-show Heart -c "#ff3e98" -s 30
+```
+
 ## 开发
 
 ```bash

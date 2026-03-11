@@ -90,6 +90,18 @@ async function generate() {
     const indexContent = generateIndexFile(icons)
     fs.writeFileSync(path.join(process.cwd(), 'src', 'index.ts'), indexContent)
 
+    // Generate icon names list for CLI
+    const iconData = icons.map(icon => ({
+        name: icon.name,
+        componentName: icon.componentName,
+    }))
+    const cliDir = path.join(process.cwd(), 'src', 'cli')
+    if (!fs.existsSync(cliDir)) {
+        fs.mkdirSync(cliDir, { recursive: true })
+    }
+    const iconNamesContent = `export const iconList = ${JSON.stringify(iconData, null, 2)} as const;`
+    fs.writeFileSync(path.join(cliDir, 'icon-list.ts'), iconNamesContent)
+
     console.log(`✅ Generated ${icons.length} icon modules`)
     console.log(`📁 Output directory: ${OUTPUT_DIR}`)
 }

@@ -63,14 +63,67 @@ import { House } from 'lucide-react-taro/icons/house';
 
 常用图标：`House`、`Settings`、`User`、`Search`、`Menu`、`ChevronRight`、`Check`、`X`、`Plus`、`Minus`、`Heart`、`Star`、`Camera`、`Image`、`Share`、`Download`、`Upload`
 
+## CLI 工具：查找和验证图标
+
+本库提供了 CLI 工具来查找和验证图标是否存在。这对 AI 助手非常有用，可以在生成代码前验证图标名称是否正确。
+
+### 查找图标
+
+```bash
+# 模糊查找（默认）
+npx taro-lucide-find arrow
+
+# 精确查找
+npx taro-lucide-find arrow-up --exact
+
+# 列出所有图标
+npx taro-lucide-find --list
+```
+
+### 验证图标
+
+推荐在生成代码前，使用 `--json` 参数批量验证图标是否存在。
+
+```bash
+npx taro-lucide-find arrow-up user settings arw --json
+```
+
+**输出示例：**
+
+```json
+[
+  {
+    "query": "arrow-up",
+    "exists": true,
+    "name": "ArrowUp",
+    "suggestions": []
+  },
+  {
+    "query": "arw",
+    "exists": false,
+    "name": null,
+    "suggestions": ["ArrowBigDownDash", "Archive", "..."]
+  }
+]
+```
+
+如果 `exists` 为 `false`，请使用 `suggestions` 中的推荐图标名称。
+
 ## CLI 工具：生成 TabBar 图标
 
 微信小程序的 TabBar 不支持 base64 或 SVG 图片，只能使用本地 PNG 文件。本库提供了 CLI 工具来生成 TabBar 所需的 PNG 图标。
 
-### 使用方法
+### 批量生成 TabBar 图标
+
+支持一次性生成所有 TabBar 图标。
 
 ```bash
 npx taro-lucide-tabbar House Settings User -c "#999999" -a "#1890ff"
+```
+
+### 指定输出目录和尺寸
+
+```bash
 npx taro-lucide-tabbar House Settings User -c "#999999" -a "#1890ff" -o ./src/assets/tabbar -s 81
 ```
 

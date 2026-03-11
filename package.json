@@ -1,12 +1,14 @@
 {
   "name": "lucide-react-taro",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Lucide icons for Taro with dynamic color support, tree shaking, and WeChat miniprogram compatibility",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
   "bin": {
-    "taro-lucide-tabbar": "./dist/cjs/cli/index.js"
+    "taro-lucide-tabbar": "./dist/cjs/cli/index.js",
+    "taro-lucide-find": "./dist/cjs/cli/find.js",
+    "taro-lucide-show": "./dist/cjs/cli/show.js"
   },
   "sideEffects": false,
   "exports": {
@@ -82,6 +84,7 @@
   },
   "dependencies": {
     "commander": "^14.0.0",
+    "fuse.js": "^7.1.0",
     "sharp": "^0.33.0"
   }
 }
