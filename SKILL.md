@@ -7,6 +7,15 @@ description: 在 Taro 微信小程序和 Web 项目中使用 Lucide 图标。当
 
 `lucide-react-taro` 是 Lucide 图标库的 Taro 适配版本，专为 Taro 微信小程序和 Web 平台设计。
 
+## 渲染原理（微信小程序端）
+
+在微信小程序端，icon 不是用 `<svg />` 渲染，而是将 SVG 字符串编码成 `data:image/svg+xml,...`，再用 `@tarojs/components` 的 `<Image />` 渲染（实现入口：`src/Icon.tsx` 的 `createIcon`）。
+
+因此：
+
+- `className` 只作用在 `<Image />` 本身（布局/外边距/对齐等），不会作用到 SVG 内部的 `stroke/fill`
+- 不要指望 `text-*` 之类的 class 去改变 icon 颜色；改颜色请用 `color`
+
 ## 安装
 
 ```bash
@@ -16,6 +25,8 @@ pnpm add lucide-react-taro
 ```
 
 ## 基础用法
+
+✅ 正确示例（用 `color/size/strokeWidth`，以及可选的 `style` 覆盖尺寸）
 
 ```tsx
 import { House, Settings, Camera, Zap } from 'lucide-react-taro';
@@ -35,6 +46,20 @@ function MyComponent() {
 }
 ```
 
+❌ 错误示例（`className` 的 `text-*` 不会改变 icon 的 `stroke/fill`；它只是 `<Image />` 的 class）
+
+```tsx
+import { House } from 'lucide-react-taro';
+
+function MyComponent() {
+  return (
+    <View>
+      <House className="text-red-500 w-8 h-8" />
+    </View>
+  );
+}
+```
+
 ## Props
 
 | 属性                  | 类型               | 默认值           | 说明                                   |
@@ -43,7 +68,7 @@ function MyComponent() {
 | `color`               | `string`           | `'currentColor'` | 图标颜色                               |
 | `strokeWidth`         | `number \| string` | `2`              | 描边宽度                               |
 | `absoluteStrokeWidth` | `boolean`          | `false`          | 绝对描边宽度，启用后描边不随 size 缩放 |
-| `className`           | `string`           | -                | CSS 类名                               |
+| `className`           | `string`           | -                | Image 的 className（用于布局等）       |
 | `style`               | `CSSProperties`    | -                | 内联样式                               |
 
 同时支持 Taro `Image` 组件的其他属性。
@@ -166,7 +191,7 @@ export default defineAppConfig({
 
 ## 注意事项
 
-1. **颜色默认值**：默认颜色为 `currentColor`，在小程序 Image 组件中可能不会继承父元素颜色，建议显式设置 `color` 属性。
+1. **禁止颜色继承**：小程序端是 `<Image />` 渲染，无法从父元素继承文本颜色；请显式设置 `color`，不要依赖 `className` 的 `text-*`。
 2. **性能优化**：组件内部已实现 base64 缓存，相同参数组合只计算一次。
 3. **兼容性**：已内置 base64 编码 polyfill，无需额外配置即可在微信小程序中使用。
 4. **TabBar 图标**：小程序 TabBar 不支持 SVG/base64，请使用 CLI 工具生成 PNG 图标。
