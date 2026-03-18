@@ -1,10 +1,15 @@
 import React, { memo } from "react";
+import { useNavigate } from "react-router-dom";
 import * as LucideIcons from "lucide-react-taro";
 
-// Filter out non-icon exports (like createLucideIcon)
-const RAW_ICONS = Object.values(LucideIcons).filter(
-  (icon) => typeof icon === "function" || typeof icon === "object"
-);
+// Filter out non-icon exports (like createIcon)
+const RAW_ICONS = Object.entries(LucideIcons)
+  .filter(
+    ([name, icon]) =>
+      (typeof icon === "function" || typeof icon === "object") &&
+      /^[A-Z]/.test(name)
+  )
+  .map(([name, icon]) => ({ name, icon }));
 
 // Shuffle the icons array to make the grid look more random and interesting
 const SHUFFLED_ICONS = [...RAW_ICONS].sort(() => Math.random() - 0.5);
@@ -16,11 +21,15 @@ const TOTAL_ICONS = 280;
 const DISPLAY_ICONS = Array.from({ length: TOTAL_ICONS }, (_, i) => SHUFFLED_ICONS[i % SHUFFLED_ICONS.length]);
 
 // Memoize the individual icon wrapper to prevent React from doing unnecessary diffing during any parent re-renders
-const IconWrapper = memo(({ IconComponent }: { IconComponent: any }) => {
-  if (!IconComponent || typeof IconComponent !== 'function' || !/^[A-Z]/.test(IconComponent.name)) return null;
+const IconWrapper = memo(({ name, icon: IconComponent }: { name: string; icon: any }) => {
+  const navigate = useNavigate();
+  if (!IconComponent || typeof IconComponent !== 'function') return null;
   const Icon = IconComponent as React.FC<any>;
   return (
-    <div className="flex aspect-square w-7 items-center justify-center text-foreground/60 hover:text-foreground hover:scale-125 transition-all cursor-pointer">
+    <div 
+      className="flex aspect-square w-7 items-center justify-center text-foreground/60 hover:text-foreground hover:scale-125 transition-all cursor-pointer"
+      onClick={() => navigate(`/icons/${name}`)}
+    >
       <Icon size={20} strokeWidth={1.5} />
     </div>
   );
@@ -42,15 +51,15 @@ export function HeroIcons() {
           >
             {/* First Block */}
             <div className="grid grid-cols-8 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-14 gap-3 pb-3 pt-3 justify-center">
-              {DISPLAY_ICONS.map((IconComponent, i) => (
-                <IconWrapper key={`icon-a-${i}`} IconComponent={IconComponent} />
+              {DISPLAY_ICONS.map((item, i) => (
+                <IconWrapper key={`icon-a-${i}`} name={item.name} icon={item.icon} />
               ))}
             </div>
 
             {/* Second Block (Duplicate for seamless scrolling) */}
             <div className="grid grid-cols-8 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-14 gap-3 pb-3 justify-center">
-              {DISPLAY_ICONS.map((IconComponent, i) => (
-                <IconWrapper key={`icon-b-${i}`} IconComponent={IconComponent} />
+              {DISPLAY_ICONS.map((item, i) => (
+                <IconWrapper key={`icon-b-${i}`} name={item.name} icon={item.icon} />
               ))}
             </div>
           </div>
