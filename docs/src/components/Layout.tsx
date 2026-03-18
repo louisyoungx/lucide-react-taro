@@ -13,6 +13,8 @@ export function Layout() {
                 lucide-react-taro
               </span>
             </Link>
+          </div>
+          <div className="flex flex-1 items-center justify-end space-x-6">
             <nav className="flex items-center space-x-6 text-sm font-medium">
               <Link
                 to="/icons"
@@ -20,9 +22,19 @@ export function Layout() {
               >
                 Icons
               </Link>
+              <Link
+                to="/guide"
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+              >
+                Guide
+              </Link>
+              <Link
+                to="/license"
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+              >
+                License
+              </Link>
             </nav>
-          </div>
-          <div className="flex flex-1 items-center justify-end space-x-2">
             <nav className="flex items-center">
               <a
                 href="https://github.com/louisyoungx/lucide-react-taro"
