@@ -1,0 +1,23 @@
+{
+  "rewrites": [
+    {
+      "source": "/skill",
+      "destination": "/skill"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/skill",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        }
+      ]
+    }
+  ]
+}
