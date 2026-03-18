@@ -2,7 +2,7 @@ export default function LicensePage() {
   return (
     <div className="flex flex-col gap-8 max-w-3xl mx-auto py-8">
       <div className="flex flex-col gap-2">
-        <h1 className="text-4xl font-extrabold tracking-tight">License</h1>
+        <h1 className="text-4xl font-extrabold tracking-tight">开源协议</h1>
         <p className="text-lg text-muted-foreground">
           MIT & ISC Licenses
         </p>
@@ -10,9 +10,9 @@ export default function LicensePage() {
 
       <div className="prose prose-slate dark:prose-invert max-w-none">
         <p>
-          This project (lucide-react-taro) is a wrapper for Lucide icons to support Taro framework.
-          The LICENSE below is copied from the original Lucide project (<a href="https://github.com/lucide-icons/lucide" target="_blank" rel="noreferrer" className="text-primary hover:underline">https://github.com/lucide-icons/lucide</a>).
-          All copyrights belong to Lucide and its contributors.
+          本项目 (lucide-react-taro) 是对 Lucide 图标库的 Taro 框架封装。
+          下方的开源协议复制自原始的 Lucide 项目 (<a href="https://github.com/lucide-icons/lucide" target="_blank" rel="noreferrer" className="text-primary hover:underline">https://github.com/lucide-icons/lucide</a>)。
+          所有版权归 Lucide 及其贡献者所有。
         </p>
 
         <hr className="my-8 border-border" />

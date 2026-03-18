@@ -37,9 +37,9 @@ export default function IconDetailPage() {
   if (!Icon) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4">
-        <h2 className="text-2xl font-bold">Icon not found</h2>
+        <h2 className="text-2xl font-bold">未找到图标</h2>
         <Link to="/icons">
-          <Button>Back to Icons</Button>
+          <Button>返回全部图标</Button>
         </Link>
       </div>
     );

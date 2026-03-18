@@ -70,9 +70,9 @@ export default function IconsPage() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">Icons</h1>
+        <h1 className="text-3xl font-bold tracking-tight">图标</h1>
         <p className="text-muted-foreground">
-          {filteredIcons.length} icons found
+          共找到 {filteredIcons.length} 个图标
         </p>
       </div>
 
@@ -81,7 +81,7 @@ export default function IconsPage() {
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <input
             type="search"
-            placeholder="Search icons..."
+            placeholder="搜索图标..."
             className="flex h-10 w-full rounded-md border border-input bg-background pl-9 pr-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             value={query}
             onChange={(e) => {
@@ -102,7 +102,7 @@ export default function IconsPage() {
 
       {filteredIcons.length === 0 && (
         <div className="text-center text-muted-foreground py-12">
-          No icons found matching "{query}"
+          未找到与 "{query}" 匹配的图标
         </div>
       )}
 

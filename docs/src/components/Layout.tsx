@@ -20,19 +20,19 @@ export function Layout() {
                 to="/icons"
                 className="transition-colors hover:text-foreground/80 text-foreground/60"
               >
-                Icons
+                图标
               </Link>
               <Link
                 to="/guide"
                 className="transition-colors hover:text-foreground/80 text-foreground/60"
               >
-                Guide
+                指南
               </Link>
               <Link
                 to="/license"
                 className="transition-colors hover:text-foreground/80 text-foreground/60"
               >
-                License
+                开源协议
               </Link>
             </nav>
             <nav className="flex items-center">
