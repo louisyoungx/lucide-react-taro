@@ -145,9 +145,10 @@ export default function IconDetailPage() {
             </div>
           </div>
 
-          <div className="rounded-lg border bg-muted/50 p-4 relative group min-h-[218px]">
-            <div className="mb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">代码示例</div>
+          <div className="flex flex-col gap-3 min-h-[218px]">
+            <div className="text-sm font-semibold">代码示例</div>
             <CodeBlock
+              className="min-h-[194px]"
               language="tsx"
               code={`import { ${iconName} } from 'lucide-react-taro';
 
