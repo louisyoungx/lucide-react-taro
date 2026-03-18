@@ -110,6 +110,20 @@ import { House, Settings, User, Camera, Zap } from 'lucide-react-taro';
 
 同时支持 Taro `Image` 组件的其他属性。
 
+### 强制要求 color 和 size（全局配置）
+
+如果你希望在项目中强制要求每个图标都必须传递 `color` 和 `size` 属性（避免遗漏导致样式不一致），你可以通过 TypeScript 的 Module Augmentation（模块增强）来实现：
+
+```tsx
+// 在你的项目类型声明文件（如 global.d.ts 或 taro-env.d.ts）中添加：
+declare module 'lucide-react-taro' {
+  interface LucideTaroConfig {
+    strictProps: true;
+  }
+}
+```
+配置后，如果使用图标时不传入 `color` 或 `size`，TypeScript 将会报错。
+
 ## CLI 工具
 
 微信小程序的 TabBar 不支持 base64 或 SVG 图片，只能使用本地 PNG 文件。本库提供了 CLI 工具来生成 TabBar 所需的 PNG 图标。
