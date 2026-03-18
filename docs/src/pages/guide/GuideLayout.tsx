@@ -22,6 +22,10 @@ const sidebarNavItems = [
     title: "CLI 工具",
     href: "/guide/cli",
   },
+  {
+    title: "AI 助手技能 (Skill)",
+    href: "/guide/skill",
+  },
 ];
 
 export default function GuideLayout() {

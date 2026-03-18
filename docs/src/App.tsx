@@ -12,6 +12,7 @@ import RenderingPage from "@/pages/guide/RenderingPage";
 import UsagePage from "@/pages/guide/UsagePage";
 import PropsPage from "@/pages/guide/PropsPage";
 import CliPage from "@/pages/guide/CliPage";
+import SkillPage from "@/pages/guide/SkillPage";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="usage" element={<UsagePage />} />
           <Route path="props" element={<PropsPage />} />
           <Route path="cli" element={<CliPage />} />
+          <Route path="skill" element={<SkillPage />} />
         </Route>
         <Route path="license" element={<LicensePage />} />
       </Route>

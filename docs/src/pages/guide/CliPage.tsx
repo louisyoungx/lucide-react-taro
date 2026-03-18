@@ -32,6 +32,21 @@ npx taro-lucide-tabbar House -c "#999999" -o ./src/assets/tabbar -s 81`}
         </div>
 
         <div>
+          <h3 className="text-2xl font-bold mb-4">在终端预览图标</h3>
+          <p className="mb-4 text-foreground/90">
+            在命令行中直接预览图标的渲染效果。
+          </p>
+          <CodeBlock
+            language="bash"
+            code={`# 预览图标
+npx taro-lucide-show arrow-up
+
+# 指定尺寸和颜色
+npx taro-lucide-show arrow-up -s 60 -c "#ff0000"`}
+          />
+        </div>
+
+        <div>
           <h3 className="text-2xl font-bold mb-4">查找和验证图标</h3>
           <p className="mb-4 text-foreground/90">
             实用的终端工具，支持在命令行直接查找图标，或通过代码批量验证。
