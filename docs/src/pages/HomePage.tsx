@@ -9,9 +9,12 @@ export default function HomePage() {
     <div className="flex flex-col gap-16 py-8">
       <section className="grid lg:grid-cols-2 gap-8 items-center min-h-[300px]">
         <div className="flex flex-col items-start gap-6 py-8">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
-            Lucide React Taro
-          </h1>
+          <div className="flex items-center gap-4">
+            <img src="/assets/logo.svg" alt="lucide-react-taro logo" className="h-16 w-16" />
+            <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
+              Lucide React Taro
+            </h1>
+          </div>
           <p className="text-xl text-muted-foreground max-w-[700px]">
             为 Taro 应用打造的精美、一致的图标库。基于 Lucide 构建。
             支持 Tree-shaking、动态颜色以及描边自定义。

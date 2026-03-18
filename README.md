@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://github.com/lucide-icons/lucide#gh-light-mode-only">
-    <img src="https://raw.githubusercontent.com/louisyoungx/lucide-react-taro/refs/heads/main/assets/logo.svg" alt="Lucide - Beautiful & consistent icon toolkit made by the community. Open-source project and a fork of Feather Icons." width="480">
+  <a href="https://lucide.rocke.top">
+    <img src="https://raw.githubusercontent.com/louisyoungx/lucide-react-taro/refs/heads/main/docs/public/assets/banner.svg" alt="Lucide - Beautiful & consistent icon toolkit made by the community. Open-source project and a fork of Feather Icons." width="480">
   </a>
 </p>
 
@@ -11,14 +11,22 @@
 </p>
 
 <p align="center">
-  <a href="https://lucide.rocke.top/icons"><img src="https://img.shields.io/badge/🔍_查看所有图标-6566f5?style=for-the-badge" alt="Browse Icons"></a>
+  <a href="https://lucide.rocke.top/icons/">图标</a>
+  ·
+  <a href="https://lucide.rocke.top/guide/">使用文档</a>
+  ·
+  <a href="https://lucide.rocke.top/license">开源协议</a>
+  ·
+  <a href="https://lucide.rocke.top/skill">SKILL</a>
 </p>
 
 # Lucide React Taro
 
 在 Taro 小程序中使用 [Lucide](https://lucide.dev/) 图标的高性能解决方案，提供图标组件和 TabBar PNG 图标生成 CLI 工具。
 
-**使用文档**：[https://lucide.rocke.top](https://lucide.rocke.top)
+- 使用文档：[https://lucide.rocke.top](https://lucide.rocke.top)
+
+- 查看所有图标：[https://lucide.rocke.top/icons](https://lucide.rocke.top/icons)
 
 ## AI 助手接入
 
