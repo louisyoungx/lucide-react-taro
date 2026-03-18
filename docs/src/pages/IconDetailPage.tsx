@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import * as LucideIcons from "lucide-react-taro";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { ArrowLeft, Check, Copy } from "lucide-react";
 
 export default function IconDetailPage() {
   const { iconName } = useParams();
@@ -13,6 +14,25 @@ export default function IconDetailPage() {
   const [color, setColor] = useState("#000000");
   const [strokeWidth, setStrokeWidth] = useState(2);
   const [filled, setFilled] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const presetColors = [
+    "#000000", // Black
+    "#ef4444", // Red 500
+    "#f97316", // Orange 500
+    "#eab308", // Amber 500
+    "#22c55e", // Yellow 500
+    "#84cc16", // Lime 500
+    "#10b981", // Emerald 500
+    "#14b8a6", // Teal 500
+    "#06b6d4", // Cyan 500
+    "#0ea5e9", // Sky 500
+    "#3b82f6", // Blue 500
+    "#6366f1", // Indigo 500
+    "#8b5cf6", // Violet 500
+    "#a855f7", // Purple 500
+    "#d946ef", // Fuchsia 500
+  ];
 
   if (!Icon) {
     return (
@@ -25,12 +45,25 @@ export default function IconDetailPage() {
     );
   }
 
+  const copyToClipboard = () => {
+    const code = `import { ${iconName} } from 'lucide-react-taro';
+
+<${iconName} 
+  size={${size}} 
+  color="${color}" 
+  strokeWidth={${strokeWidth}}${filled ? '\n  filled' : ''} 
+/>`;
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <div className="flex flex-col gap-8 py-6">
+    <div className="flex flex-col gap-8 py-6 max-w-5xl mx-auto">
       <div>
         <Link to="/icons">
           <Button variant="ghost" className="gap-2 pl-0 hover:bg-transparent hover:text-primary">
-            <ArrowLeft className="h-4 w-4" /> Back to Icons
+            <ArrowLeft className="h-4 w-4" /> 返回全部图标
           </Button>
         </Link>
       </div>
@@ -40,16 +73,16 @@ export default function IconDetailPage() {
           <Icon size={size} color={color} strokeWidth={strokeWidth} filled={filled} />
         </div>
 
-        <div className="w-full lg:w-96 flex flex-col gap-8">
+        <div className="flex-1 flex flex-col gap-8">
           <div>
             <h1 className="text-4xl font-extrabold tracking-tight mb-2">{iconName}</h1>
-            <p className="text-muted-foreground">Customize the icon appearance below.</p>
+            <p className="text-muted-foreground">在下方自定义图标的外观。</p>
           </div>
           
           <div className="space-y-6">
             <div className="space-y-3">
               <div className="flex justify-between">
-                <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Size</label>
+                <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">尺寸 (Size)</label>
                 <span className="text-sm text-muted-foreground">{size}px</span>
               </div>
               <input 
@@ -64,7 +97,7 @@ export default function IconDetailPage() {
             
             <div className="space-y-3">
               <div className="flex justify-between">
-                <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Stroke Width</label>
+                <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">线条粗细 (Stroke Width)</label>
                 <span className="text-sm text-muted-foreground">{strokeWidth}px</span>
               </div>
               <input 
@@ -79,9 +112,9 @@ export default function IconDetailPage() {
             </div>
 
             <div className="space-y-3">
-              <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Color</label>
+              <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">颜色 (Color)</label>
               <div className="flex gap-3">
-                <div className="relative h-10 w-10 overflow-hidden rounded-md border shadow-sm">
+                <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-md border shadow-sm aspect-square">
                   <input 
                     type="color" 
                     value={color} 
@@ -96,30 +129,51 @@ export default function IconDetailPage() {
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 uppercase"
                 />
               </div>
+              <div className="flex flex-wrap gap-2 pt-2">
+                {presetColors.map((preset) => (
+                  <button
+                    key={preset}
+                    onClick={() => setColor(preset)}
+                    className="h-6 w-6 rounded-md border shadow-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-transform hover:scale-110"
+                    style={{ backgroundColor: preset }}
+                    title={preset}
+                    aria-label={`Select color ${preset}`}
+                  />
+                ))}
+              </div>
             </div>
 
             <div className="flex items-center space-x-2 pt-2">
-              <input
-                type="checkbox"
+              <Switch 
                 id="filled"
                 checked={filled}
-                onChange={(e) => setFilled(e.target.checked)}
-                className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                onCheckedChange={setFilled}
               />
               <label
                 htmlFor="filled"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
-                Filled (Solid)
+                填充 (Filled)
               </label>
             </div>
           </div>
 
-          <div className="rounded-lg border bg-muted/50 p-4">
-            <div className="mb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Usage</div>
-            <pre className="text-sm overflow-x-auto font-mono">
+          <div className="rounded-lg border bg-muted/50 p-4 relative group min-h-[218px]">
+            <div className="mb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">代码示例</div>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute top-2 right-2 h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
+              onClick={copyToClipboard}
+              title="复制代码"
+            >
+              {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+            </Button>
+            <pre className="text-sm overflow-x-auto font-mono selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
               <code className="text-foreground">
-{`<${iconName} 
+{`import { ${iconName} } from 'lucide-react-taro';
+
+<${iconName} 
   size={${size}} 
   color="${color}" 
   strokeWidth={${strokeWidth}}${filled ? '\n  filled' : ''} 

@@ -1,12 +1,31 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, memo, useTransition, useEffect } from "react";
 import { Link } from "react-router-dom";
 import * as LucideIcons from "lucide-react-taro";
 import { Search } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
+const IconCard = memo(({ name }: { name: string }) => {
+  const Icon = (LucideIcons as any)[name];
+  return (
+    <Link
+      to={`/icons/${name}`}
+      className="flex flex-col items-center justify-center gap-2 rounded-lg border p-4 transition-colors hover:bg-accent hover:text-accent-foreground"
+    >
+      <div className="h-8 w-8 flex items-center justify-center">
+         <Icon size={24} />
+      </div>
+      <span className="text-xs text-muted-foreground truncate w-full text-center">
+        {name}
+      </span>
+    </Link>
+  );
+});
 
 export default function IconsPage() {
   const [query, setQuery] = useState("");
-  const [limit, setLimit] = useState(100);
+  const [limit, setLimit] = useState(300);
+  const [isPending, startTransition] = useTransition();
+
+  const targetRef = useRef<HTMLDivElement>(null);
 
   const iconList = useMemo(() => {
     return Object.keys(LucideIcons).filter((key) => {
@@ -22,6 +41,31 @@ export default function IconsPage() {
   }, [query, iconList]);
 
   const displayedIcons = filteredIcons.slice(0, limit);
+
+  // Re-evaluate intersection whenever the limit or list changes.
+  // This prevents the observer from getting "stuck" if the initial load
+  // doesn't fill the screen or push the target out of view.
+  useEffect(() => {
+    const node = targetRef.current;
+    if (!node) return;
+    
+    // Stop observing if we've loaded everything
+    if (displayedIcons.length >= filteredIcons.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          startTransition(() => {
+            setLimit((prev) => prev + 150);
+          });
+        }
+      },
+      { rootMargin: "800px" }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [limit, displayedIcons.length, filteredIcons.length]);
 
   return (
     <div className="flex flex-col gap-6">
@@ -42,30 +86,18 @@ export default function IconsPage() {
             value={query}
             onChange={(e) => {
               setQuery(e.target.value);
-              setLimit(100); // Reset limit on search
+              startTransition(() => {
+                setLimit(300); // Reset limit on search
+              });
             }}
           />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-        {displayedIcons.map((name) => {
-          const Icon = (LucideIcons as any)[name];
-          return (
-            <Link
-              key={name}
-              to={`/icons/${name}`}
-              className="flex flex-col items-center justify-center gap-2 rounded-lg border p-4 transition-colors hover:bg-accent hover:text-accent-foreground"
-            >
-              <div className="h-8 w-8 flex items-center justify-center">
-                 <Icon size={24} />
-              </div>
-              <span className="text-xs text-muted-foreground truncate w-full text-center">
-                {name}
-              </span>
-            </Link>
-          );
-        })}
+        {displayedIcons.map((name) => (
+          <IconCard key={name} name={name} />
+        ))}
       </div>
 
       {filteredIcons.length === 0 && (
@@ -74,13 +106,12 @@ export default function IconsPage() {
         </div>
       )}
 
-      {displayedIcons.length < filteredIcons.length && (
-        <div className="flex justify-center py-8">
-          <Button onClick={() => setLimit((prev) => prev + 100)}>
-            Load More
-          </Button>
-        </div>
-      )}
+      {/* Always render target to ensure ref is attached, but conditionally show spinner */}
+      <div ref={targetRef} className="flex justify-center py-8">
+        {displayedIcons.length < filteredIcons.length && (
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+        )}
+      </div>
     </div>
   );
 }
