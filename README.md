@@ -11,12 +11,14 @@
 </p>
 
 <p align="center">
-  <a href="https://lucide.dev/icons/"><img src="https://img.shields.io/badge/🔍_查看所有图标-lucide.dev-6566f5?style=for-the-badge" alt="Browse Icons"></a>
+  <a href="https://lucide.rocke.top/icons"><img src="https://img.shields.io/badge/🔍_查看所有图标-6566f5?style=for-the-badge" alt="Browse Icons"></a>
 </p>
 
 # Lucide React Taro
 
 在 Taro 小程序中使用 [Lucide](https://lucide.dev/) 图标的高性能解决方案，提供图标组件和 TabBar PNG 图标生成 CLI 工具。
+
+**使用文档**：[https://lucide.rocke.top](https://lucide.rocke.top)
 
 ## AI 助手接入
 
