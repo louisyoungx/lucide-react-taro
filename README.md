@@ -34,6 +34,7 @@ npx skills add louisyoungx/lucide-react-taro
 - **Tree Shaking**：每个图标独立模块，只打包你使用的图标
 - **TypeScript 支持**：完整的类型定义
 - **与 lucide-react 一致的 API**：支持 `size`、`color`、`strokeWidth`、`absoluteStrokeWidth` 等属性
+- **实心图标支持**：通过 `filled` 渲染实心图标（如 Heart）
 - **CLI 工具**：支持生成小程序 TabBar 所需的 PNG 图标
 
 ## 安装
@@ -72,6 +73,9 @@ import { House, Settings, User, Camera, Zap } from 'lucide-react-taro';
 <Camera color="#1890ff" />
 <Camera color="rgb(255, 0, 0)" />
 
+// 实心图标（如 Heart）
+<Heart filled color="#ff3e98" />
+
 // 自定义描边宽度
 <Zap strokeWidth={1} />
 <Zap strokeWidth={3} />
@@ -98,6 +102,7 @@ import { House, Settings, User, Camera, Zap } from 'lucide-react-taro';
 | ------------------- | ---------------- | -------------- | -------------------------------------- |
 | size                | number \| string | 24             | 图标尺寸                               |
 | color               | string           | 'currentColor' | 图标颜色                               |
+| filled              | boolean          | false          | 是否渲染为实心（fill=currentColor）    |
 | strokeWidth         | number \| string | 2              | 描边宽度                               |
 | absoluteStrokeWidth | boolean          | false          | 绝对描边宽度，启用后描边不随 size 缩放 |
 | className           | string           | -              | CSS 类名                               |

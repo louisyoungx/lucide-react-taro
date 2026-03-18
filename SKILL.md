@@ -29,7 +29,7 @@ pnpm add lucide-react-taro
 ✅ 正确示例（用 `color/size/strokeWidth`，以及可选的 `style` 覆盖尺寸）
 
 ```tsx
-import { House, Settings, Camera, Zap } from 'lucide-react-taro';
+import { House, Settings, Camera, Zap, Heart } from 'lucide-react-taro';
 
 function MyComponent() {
   return (
@@ -37,9 +37,8 @@ function MyComponent() {
       <House />
       <Settings size={32} />
       <Camera color="#ff0000" />
-      <Zap strokeWidth={1} />
-      <Zap size={48} color="#1890ff" strokeWidth={1.5} />
-      <Zap size={48} strokeWidth={2} absoluteStrokeWidth />
+      <Zap size={48} color="#1890ff" strokeWidth={1.5} />absoluteStrokeWidth />
+      <Heart filled color="#ff3e98" />
       <House className="my-icon" style={{ marginRight: 8 }} />
     </View>
   );
@@ -66,6 +65,7 @@ function MyComponent() {
 | --------------------- | ------------------ | ---------------- | -------------------------------------- |
 | `size`                | `number \| string` | `24`             | 图标尺寸                               |
 | `color`               | `string`           | `'currentColor'` | 图标颜色                               |
+| `filled`              | `boolean`          | `false`          | 是否渲染为实心（fill=currentColor）    |
 | `strokeWidth`         | `number \| string` | `2`              | 描边宽度                               |
 | `absoluteStrokeWidth` | `boolean`          | `false`          | 绝对描边宽度，启用后描边不随 size 缩放 |
 | `className`           | `string`           | -                | Image 的 className（用于布局等）       |
