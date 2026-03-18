@@ -159,3 +159,33 @@ describe('Color replacement', () => {
     expect(src).toContain(encodeURIComponent('stroke="currentColor"'));
   });
 });
+
+describe('Filled rendering', () => {
+  it('should render filled icon when filled is true', () => {
+    const TestIcon = createIcon(mockSvgTemplate, 'FilledIcon');
+    const { getByTestId } = render(<TestIcon filled />);
+    const src = getByTestId('icon-image').getAttribute('src');
+    expect(src).toContain(encodeURIComponent('fill="currentColor"'));
+    expect(src).toContain(encodeURIComponent('stroke="none"'));
+  });
+
+  it('should fill with provided color when filled is true', () => {
+    const TestIcon = createIcon(mockSvgTemplate, 'FilledColorIcon');
+    const { getByTestId } = render(<TestIcon filled color="#ff0000" />);
+    const src = getByTestId('icon-image').getAttribute('src');
+    expect(src).toContain(encodeURIComponent('fill="#ff0000"'));
+    expect(src).toContain(encodeURIComponent('stroke="none"'));
+  });
+
+  it('should generate different data URL between filled and outline', () => {
+    const TestIcon = createIcon(mockSvgTemplate, 'FilledCacheIcon');
+    const { getByTestId: getOutline } = render(<TestIcon color="#ff0000" />);
+    const outlineSrc = getOutline('icon-image').getAttribute('src');
+    cleanup();
+
+    const { getByTestId: getFilled } = render(<TestIcon color="#ff0000" filled />);
+    const filledSrc = getFilled('icon-image').getAttribute('src');
+
+    expect(outlineSrc).not.toBe(filledSrc);
+  });
+});

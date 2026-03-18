@@ -5,6 +5,7 @@ import React, { CSSProperties, useMemo } from 'react';
 export interface IconProps extends Omit<ImageProps, 'src' | 'style'> {
   size?: number | string;
   color?: string;
+  filled?: boolean;
   strokeWidth?: number | string;
   absoluteStrokeWidth?: boolean;
   className?: string;
@@ -21,6 +22,7 @@ export function createIcon(svgTemplate: string, iconName?: string) {
   const IconComponent: React.FC<IconProps> = ({
     size = 24,
     color,
+    filled = false,
     strokeWidth,
     absoluteStrokeWidth = false,
     className,
@@ -28,11 +30,16 @@ export function createIcon(svgTemplate: string, iconName?: string) {
     ...props
   }) => {
     const src = useMemo(() => {
-      const cacheKey = `${color}|${strokeWidth}|${absoluteStrokeWidth}|${size}`;
+      const cacheKey = `${color}|${filled}|${strokeWidth}|${absoluteStrokeWidth}|${size}`;
       const cached = svgCache.get(svgTemplate + cacheKey);
       if (cached) return cached;
 
       let svg = svgTemplate;
+
+      if (filled) {
+        svg = svg.replace(/fill="none"/g, 'fill="currentColor"');
+        svg = svg.replace(/stroke="currentColor"/g, 'stroke="none"');
+      }
 
       if (color) {
         svg = svg.replace(/stroke="currentColor"/g, `stroke="${color}"`);
@@ -49,7 +56,7 @@ export function createIcon(svgTemplate: string, iconName?: string) {
       const result = svgToDataUrl(svg);
       svgCache.set(svgTemplate + cacheKey, result);
       return result;
-    }, [color, strokeWidth, absoluteStrokeWidth, size]);
+    }, [color, filled, strokeWidth, absoluteStrokeWidth, size]);
 
     const sizeValue = typeof size === 'number' ? `${size}px` : size;
 
