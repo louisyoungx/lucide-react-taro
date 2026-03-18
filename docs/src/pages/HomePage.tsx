@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Package, Terminal, Zap, Bot, Image as ImageIcon, Paintbrush, Sparkles, TerminalSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CodeBlock } from "@/components/ui/CodeBlock";
 import { HeroIcons } from "@/components/HeroIcons";
 
 export default function HomePage() {
@@ -104,10 +105,9 @@ export default function HomePage() {
               </li>
             </ul>
           </div>
-          <div className="bg-muted rounded-xl p-6 shadow-sm border font-mono text-sm overflow-x-auto">
-            <pre className="text-foreground">
-              <code>
-{`import { Heart, Settings, Zap } from 'lucide-react-taro';
+          <CodeBlock
+            language="tsx"
+            code={`import { Heart, Settings, Zap } from 'lucide-react-taro';
 
 // 基础用法
 <Settings size={32} />
@@ -120,19 +120,17 @@ export default function HomePage() {
 
 // 自定义描边宽度
 <Zap strokeWidth={3} absoluteStrokeWidth />`}
-              </code>
-            </pre>
-          </div>
+          />
         </div>
       </section>
 
       {/* TabBar Generator Section */}
       <section className="mt-10 border-t pt-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="order-2 lg:order-1 bg-muted rounded-xl p-6 shadow-sm border font-mono text-sm overflow-x-auto">
-            <pre className="text-foreground">
-              <code>
-{`# 生成单个图标
+          <CodeBlock
+            className="order-2 lg:order-1"
+            language="bash"
+            code={`# 生成单个图标
 npx taro-lucide-tabbar House -c "#999999"
 
 # 生成附带选中状态的图标
@@ -141,9 +139,7 @@ npx taro-lucide-tabbar House -c "#999999" -a "#1890ff"
 # 批量生成多个图标
 npx taro-lucide-tabbar House Settings User \\
   -c "#999999" -a "#1890ff" -s 81`}
-              </code>
-            </pre>
-          </div>
+          />
           <div className="order-1 lg:order-2 flex flex-col gap-6">
             <h2 className="text-3xl font-bold tracking-tight">
               TabBar PNG 生成器
@@ -189,11 +185,10 @@ npx taro-lucide-tabbar House Settings User \\
             正在使用 Trae 或 Cursor 等 AI 编程助手？只需安装我们的技能 (Skill)，
             即可让 AI 瞬间掌握如何在你的项目中使用 lucide-react-taro。
           </p>
-          <div className="bg-muted inline-block rounded-xl px-6 py-4 shadow-sm border font-mono text-sm font-semibold">
-            <code className="text-foreground">
-              npx skills add louisyoungx/lucide-react-taro
-            </code>
-          </div>
+          <CodeBlock
+            language="bash"
+            code="npx skills add louisyoungx/lucide-react-taro"
+          />
         </div>
       </section>
     </div>

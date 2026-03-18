@@ -1,7 +1,12 @@
 export default function PropsPage() {
   return (
-    <section className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <h2 className="text-3xl font-bold tracking-tight border-b pb-2">属性 (Props)</h2>
+    <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-3xl font-bold tracking-tight">属性 (Props)</h1>
+        <p className="text-muted-foreground">组件支持的配置属性及详细说明。</p>
+      </div>
+      
+      <section className="flex flex-col gap-4">
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
@@ -58,6 +63,7 @@ export default function PropsPage() {
           </tbody>
         </table>
       </div>
-    </section>
+      </section>
+    </div>
   );
 }

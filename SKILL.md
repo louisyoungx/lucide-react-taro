@@ -9,12 +9,12 @@ description: 在 Taro 微信小程序和 Web 项目中使用 Lucide 图标。当
 
 ## 渲染原理（微信小程序端）
 
-在微信小程序端，icon 不是用 `<svg />` 渲染，而是将 SVG 字符串编码成 `data:image/svg+xml,...`，再用 `@tarojs/components` 的 `<Image />` 渲染（实现入口：`src/Icon.tsx` 的 `createIcon`）。
+在微信小程序环境中，图标并非通过原生的 `<svg />` 标签进行渲染。为了兼容小程序平台，底层会将 SVG 转换为 `data:image/svg+xml` 格式的字符串，并交由 `@tarojs/components` 的 `<Image />` 组件来展示（实现入口：`src/Icon.tsx` 的 `createIcon`）。
 
-因此：
+基于上述实现原理，请注意以下几点：
 
-- `className` 只作用在 `<Image />` 本身（布局/外边距/对齐等），不会作用到 SVG 内部的 `stroke/fill`
-- 不要指望 `text-*` 之类的 class 去改变 icon 颜色；改颜色请用 `color`
+- 传入的 `className` 仅会作用于外层的 `<Image />` 组件，通常只能用于控制布局、外边距、对齐等样式，无法穿透修改内部 SVG 的线条（stroke）或填充（fill）。
+- 因此，无法通过类似 `text-*` 这样的文本颜色类名来更改图标颜色。若需调整图标颜色，请直接使用组件提供的 `color` 属性。
 
 ## 安装
 

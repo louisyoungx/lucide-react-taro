@@ -32,20 +32,10 @@ export default function GuideLayout() {
   }
 
   return (
-    <div className="flex flex-col gap-8 max-w-6xl mx-auto py-8">
-      <div className="flex flex-col gap-4">
-        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
-          使用指南
-        </h1>
-        <p className="text-xl text-muted-foreground">
-          了解如何在你的项目中安装、使用和优化 lucide-react-taro。
-        </p>
-      </div>
-      
-      <div className="flex flex-col md:flex-row gap-8">
-        <aside className="md:w-64 shrink-0">
-          <nav className="flex md:flex-col gap-2 overflow-x-auto pb-4 md:pb-0 md:sticky md:top-20 scrollbar-hide">
-            {sidebarNavItems.map((item) => (
+    <div className="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto py-8 px-4 md:px-8">
+      <aside className="md:w-64 shrink-0">
+        <nav className="flex md:flex-col gap-2 overflow-x-auto pb-4 md:pb-0 md:sticky md:top-24 scrollbar-hide">
+          {sidebarNavItems.map((item) => (
               <NavLink
                 key={item.href}
                 to={item.href}
@@ -63,11 +53,10 @@ export default function GuideLayout() {
             ))}
           </nav>
         </aside>
-        
-        <main className="flex-1 min-w-0 flex flex-col gap-6">
-          <Outlet />
-        </main>
-      </div>
+      
+      <main className="flex-1 min-w-0 flex flex-col gap-6">
+        <Outlet />
+      </main>
     </div>
   );
 }

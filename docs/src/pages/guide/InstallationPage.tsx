@@ -1,18 +1,23 @@
+import { CodeBlock } from "@/components/ui/CodeBlock";
+
 export default function InstallationPage() {
   return (
-    <section className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <h2 className="text-3xl font-bold tracking-tight border-b pb-2">安装 (Installation)</h2>
-      <div className="rounded-lg border bg-card p-6 shadow-sm overflow-x-auto">
-        <pre className="text-sm font-mono">
-          <code className="text-foreground">
-{`npm install lucide-react-taro
+    <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-3xl font-bold tracking-tight">安装 (Installation)</h1>
+        <p className="text-muted-foreground">在你的 Taro 项目中引入并使用 lucide-react-taro 图标库。</p>
+      </div>
+
+      <section className="flex flex-col gap-4">
+      <CodeBlock
+        language="bash"
+        code={`npm install lucide-react-taro
 # 或者
 yarn add lucide-react-taro
 # 或者
 pnpm add lucide-react-taro`}
-          </code>
-        </pre>
-      </div>
-    </section>
+      />
+      </section>
+    </div>
   );
 }

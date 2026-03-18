@@ -3,7 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import * as LucideIcons from "lucide-react-taro";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { ArrowLeft, Check, Copy } from "lucide-react";
+import { CodeBlock } from "@/components/ui/CodeBlock";
+import { ArrowLeft } from "lucide-react";
 
 export default function IconDetailPage() {
   const { iconName } = useParams();
@@ -14,7 +15,6 @@ export default function IconDetailPage() {
   const [color, setColor] = useState("#000000");
   const [strokeWidth, setStrokeWidth] = useState(2);
   const [filled, setFilled] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   const presetColors = [
     "#000000", // Black
@@ -44,19 +44,6 @@ export default function IconDetailPage() {
       </div>
     );
   }
-
-  const copyToClipboard = () => {
-    const code = `import { ${iconName} } from 'lucide-react-taro';
-
-<${iconName} 
-  size={${size}} 
-  color="${color}" 
-  strokeWidth={${strokeWidth}}${filled ? '\n  filled' : ''} 
-/>`;
-    navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
     <div className="flex flex-col gap-8 py-6 max-w-5xl mx-auto">
@@ -160,26 +147,16 @@ export default function IconDetailPage() {
 
           <div className="rounded-lg border bg-muted/50 p-4 relative group min-h-[218px]">
             <div className="mb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">代码示例</div>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute top-2 right-2 h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
-              onClick={copyToClipboard}
-              title="复制代码"
-            >
-              {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
-            </Button>
-            <pre className="text-sm overflow-x-auto font-mono selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
-              <code className="text-foreground">
-{`import { ${iconName} } from 'lucide-react-taro';
+            <CodeBlock
+              language="tsx"
+              code={`import { ${iconName} } from 'lucide-react-taro';
 
 <${iconName} 
   size={${size}} 
   color="${color}" 
   strokeWidth={${strokeWidth}}${filled ? '\n  filled' : ''} 
 />`}
-              </code>
-            </pre>
+            />
           </div>
         </div>
       </div>

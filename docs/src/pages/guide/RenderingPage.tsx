@@ -1,16 +1,23 @@
 export default function RenderingPage() {
   return (
-    <section className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <h2 className="text-3xl font-bold tracking-tight border-b pb-2">渲染原理 (微信小程序端)</h2>
-      <div className="prose prose-slate dark:prose-invert max-w-none text-foreground/90">
+    <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-3xl font-bold tracking-tight">渲染原理</h1>
+        <p className="text-muted-foreground">了解在微信小程序端渲染 SVG 图标的底层机制与限制。</p>
+      </div>
+      
+      <section className="flex flex-col gap-4">
+      <div className="text-foreground/90 leading-relaxed">
         <p className="mb-4">
-          在微信小程序端，icon 不是用原生的 <code>{`<svg />`}</code> 渲染，而是将 SVG 字符串编码成 <code>data:image/svg+xml,...</code>，再用 Taro 的 <code>{`<Image />`}</code> 组件渲染。
+          在微信小程序环境中，图标并非通过原生的 <code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">{`<svg />`}</code> 标签进行渲染。为了兼容小程序平台，底层会将 SVG 转换为 <code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">data:image/svg+xml</code> 格式的字符串，并交由 Taro 的 <code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">{`<Image />`}</code> 组件来展示。
         </p>
+        <p className="mb-2 font-medium">基于上述实现原理，请注意以下几点：</p>
         <ul className="list-disc pl-6 space-y-2">
-          <li><code>className</code> 只作用在 <code>{`<Image />`}</code> 本身（用于布局、外边距、对齐等），不会作用到内部 SVG 的 stroke 或 fill。</li>
-          <li>不要指望 <code>text-red-500</code> 之类的 class 去改变 icon 颜色。请使用 <code>color</code> 属性。</li>
+          <li>传入的 <code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">className</code> 仅会作用于外层的 <code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">{`<Image />`}</code> 组件，通常只能用于控制外边距、对齐等布局样式，无法穿透修改内部 SVG 的线条 (<code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">stroke</code>) 或填充 (<code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">fill</code>)。</li>
+          <li>因此，无法通过类似 <code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">text-red-500</code> 这样的文本颜色类名来更改图标颜色。若需调整图标颜色，请直接使用组件提供的 <code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">color</code> 属性。</li>
         </ul>
       </div>
-    </section>
+      </section>
+    </div>
   );
 }
