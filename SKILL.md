@@ -9,7 +9,7 @@ description: 在 Taro 微信小程序和 Web 项目中使用 Lucide 图标。当
 
 ## 渲染原理（微信小程序端）
 
-在微信小程序环境中，图标并非通过原生的 `<svg />` 标签进行渲染。为了兼容小程序平台，底层会将 SVG 转换为 `data:image/svg+xml` 格式的字符串，并交由 `@tarojs/components` 的 `<Image />` 组件来展示（实现入口：`src/Icon.tsx` 的 `createIcon`）。
+在微信小程序环境中，图标并非通过原生的 `<svg />` 标签进行渲染。为了兼容小程序平台，底层会将 SVG 转换为 `data:image/svg+xml` 格式的字符串，并交由 `@tarojs/components` 的 `<Image />` 组件来展示（实现入口：`src/create-icon.tsx` 的 `createIcon`）。
 
 基于上述实现原理，请注意以下几点：
 
@@ -37,7 +37,7 @@ function MyComponent() {
       <House />
       <Settings size={32} />
       <Camera color="#ff0000" />
-      <Zap size={48} color="#1890ff" strokeWidth={1.5} />absoluteStrokeWidth />
+      <Zap size={48} color="#1890ff" strokeWidth={1.5} absoluteStrokeWidth />
       <Heart filled color="#ff3e98" />
       <House className="my-icon" style={{ marginRight: 8 }} />
     </View>
@@ -64,7 +64,7 @@ function MyComponent() {
 | 属性                  | 类型               | 默认值           | 说明                                   |
 | --------------------- | ------------------ | ---------------- | -------------------------------------- |
 | `size`                | `number \| string` | `24`             | 图标尺寸                               |
-| `color`               | `string`           | `'currentColor'` | 图标颜色                               |
+| `color`               | `string`           | -                 | 图标颜色（未设置时回退为黑色）         |
 | `filled`              | `boolean`          | `false`          | 是否渲染为实心（fill=currentColor）    |
 | `strokeWidth`         | `number \| string` | `2`              | 描边宽度                               |
 | `absoluteStrokeWidth` | `boolean`          | `false`          | 绝对描边宽度，启用后描边不随 size 缩放 |
@@ -189,9 +189,33 @@ export default defineAppConfig({
 });
 ```
 
+## LucideTaroProvider（全局默认配置）
+
+通过 `LucideTaroProvider` 为子树中所有图标设置默认颜色和尺寸，避免每个图标重复传 props。优先级：`color` prop > `defaultColor` > 回退为黑色。
+
+```tsx
+import { LucideTaroProvider, House, Settings } from 'lucide-react-taro';
+
+function App() {
+  return (
+    <LucideTaroProvider defaultColor="#666" defaultSize={20}>
+      <House />              {/* 使用 #666, 20px */}
+      <Settings color="red" /> {/* color prop 优先 */}
+    </LucideTaroProvider>
+  );
+}
+```
+
+### LucideTaroProvider Props
+
+| 属性           | 类型               | 说明                       |
+| -------------- | ------------------ | -------------------------- |
+| `defaultColor` | `string`           | 子组件默认图标颜色         |
+| `defaultSize`  | `number \| string` | 子组件默认图标尺寸         |
+
 ## 注意事项
 
-1. **禁止颜色继承**：小程序端是 `<Image />` 渲染，无法从父元素继承文本颜色；请显式设置 `color`，不要依赖 `className` 的 `text-*`。
+1. **禁止颜色继承**：小程序端是 `<Image />` 渲染，无法从父元素继承文本颜色（`currentColor` 在 Data URL 中回退为黑色）；请通过 `LucideTaroProvider` 或 `color` prop 显式设置颜色，不要依赖 `className` 的 `text-*`。
 2. **性能优化**：组件内部已实现 base64 缓存，相同参数组合只计算一次。
 3. **兼容性**：已内置 base64 编码 polyfill，无需额外配置即可在微信小程序中使用。
 4. **TabBar 图标**：小程序 TabBar 不支持 SVG/base64，请使用 CLI 工具生成 PNG 图标。

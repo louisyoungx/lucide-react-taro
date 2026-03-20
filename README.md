@@ -106,17 +106,34 @@ import { House, Settings, User, Camera, Zap } from 'lucide-react-taro';
 <User className="my-icon" style={{ marginRight: 8 }} />
 ```
 
+### LucideTaroProvider（全局默认配置）
+
+通过 `LucideTaroProvider` 为所有子组件设置默认颜色和尺寸，避免在每个图标上重复传递 props：
+
+```tsx
+import { LucideTaroProvider, House, Settings, Camera } from 'lucide-react-taro';
+
+// 所有子组件默认使用 #666 颜色和 20px 尺寸
+<LucideTaroProvider defaultColor="#666" defaultSize={20}>
+  <House />              {/* 使用 #666, 20px */}
+  <Settings color="red" /> {/* color prop 优先，使用 red */}
+  <Camera size={32} />    {/* size prop 优先，使用 32px */}
+</LucideTaroProvider>
+```
+
+> **注意**：由于小程序端 SVG 是通过 Data URL 渲染的，图标无法从 CSS 继承父元素的文字颜色（`currentColor` 会回退为黑色）。建议通过 `LucideTaroProvider` 或 `color` prop 显式指定颜色。
+
 ## API
 
-| 属性                | 类型             | 默认值         | 说明                                   |
-| ------------------- | ---------------- | -------------- | -------------------------------------- |
-| size                | number \| string | 24             | 图标尺寸                               |
-| color               | string           | 'currentColor' | 图标颜色                               |
-| filled              | boolean          | false          | 是否渲染为实心（fill=currentColor）    |
-| strokeWidth         | number \| string | 2              | 描边宽度                               |
-| absoluteStrokeWidth | boolean          | false          | 绝对描边宽度，启用后描边不随 size 缩放 |
-| className           | string           | -              | CSS 类名                               |
-| style               | CSSProperties    | -              | 自定义样式                             |
+| 属性                | 类型             | 默认值 | 说明                                   |
+| ------------------- | ---------------- | ------ | -------------------------------------- |
+| size                | number \| string | 24     | 图标尺寸                               |
+| color               | string           | -      | 图标颜色（未设置时回退为黑色）         |
+| filled              | boolean          | false  | 是否渲染为实心（fill=currentColor）    |
+| strokeWidth         | number \| string | 2      | 描边宽度                               |
+| absoluteStrokeWidth | boolean          | false  | 绝对描边宽度，启用后描边不随 size 缩放 |
+| className           | string           | -      | CSS 类名                               |
+| style               | CSSProperties    | -      | 自定义样式                             |
 
 同时支持 Taro `Image` 组件的其他属性。
 
@@ -252,7 +269,9 @@ npm test
 
 ```
 ├── src/
-│   ├── Icon.tsx          # 核心图标组件
+│   ├── context.tsx       # 上下文（LucideTaroProvider）
+│   ├── types.ts          # 类型定义
+│   ├── create-icon.tsx   # 核心图标组件
 │   ├── index.ts          # 导出入口（自动生成）
 │   ├── icons/            # 图标模块（自动生成）
 │   ├── cli/              # CLI 工具

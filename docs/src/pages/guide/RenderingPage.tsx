@@ -15,6 +15,7 @@ export default function RenderingPage() {
         <ul className="list-disc pl-6 space-y-2">
           <li>传入的 <code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">className</code> 仅会作用于外层的 <code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">{`<Image />`}</code> 组件，通常只能用于控制外边距、对齐等布局样式，无法穿透修改内部 SVG 的线条 (<code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">stroke</code>) 或填充 (<code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">fill</code>)。</li>
           <li>因此，无法通过类似 <code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">text-red-500</code> 这样的文本颜色类名来更改图标颜色。若需调整图标颜色，请直接使用组件提供的 <code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">color</code> 属性。</li>
+          <li>SVG 中的 <code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">currentColor</code> 在 Data URL 中无法继承父元素的文字颜色，会回退为黑色。建议通过 <code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">LucideTaroProvider</code> 设置全局默认颜色，或通过 <code className="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">color</code> prop 显式指定。</li>
         </ul>
       </div>
       </section>

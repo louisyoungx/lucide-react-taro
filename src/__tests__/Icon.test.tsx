@@ -1,7 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import { createIcon } from '../Icon';
+import { createIcon } from '../create-icon';
+import { LucideTaroProvider } from '../context';
 
 vi.mock('@tarojs/components', () => ({
   Image: React.forwardRef(({ src, className, style, ...props }: any, ref) => (
@@ -187,5 +188,61 @@ describe('Filled rendering', () => {
     const filledSrc = getFilled('icon-image').getAttribute('src');
 
     expect(outlineSrc).not.toBe(filledSrc);
+  });
+});
+
+describe('LucideTaroProvider', () => {
+  const TestIcon = createIcon(mockSvgTemplate, 'ProviderTestIcon');
+
+  it('should use defaultColor from provider', () => {
+    const { getByTestId } = render(
+      <LucideTaroProvider defaultColor="#00ff00">
+        <TestIcon />
+      </LucideTaroProvider>
+    );
+    const src = getByTestId('icon-image').getAttribute('src');
+    expect(src).toContain(encodeURIComponent('stroke="#00ff00"'));
+    expect(src).not.toContain(encodeURIComponent('stroke="currentColor"'));
+  });
+
+  it('should use defaultSize from provider', () => {
+    const { getByTestId } = render(
+      <LucideTaroProvider defaultSize={32}>
+        <TestIcon />
+      </LucideTaroProvider>
+    );
+    const img = getByTestId('icon-image');
+    expect(img.style.width).toBe('32px');
+    expect(img.style.height).toBe('32px');
+  });
+
+  it('should allow color prop to override defaultColor', () => {
+    const { getByTestId } = render(
+      <LucideTaroProvider defaultColor="#00ff00">
+        <TestIcon color="#ff0000" />
+      </LucideTaroProvider>
+    );
+    const src = getByTestId('icon-image').getAttribute('src');
+    expect(src).toContain(encodeURIComponent('stroke="#ff0000"'));
+    expect(src).not.toContain(encodeURIComponent('stroke="#00ff00"'));
+  });
+
+  it('should allow size prop to override defaultSize', () => {
+    const { getByTestId } = render(
+      <LucideTaroProvider defaultSize={32}>
+        <TestIcon size={48} />
+      </LucideTaroProvider>
+    );
+    const img = getByTestId('icon-image');
+    expect(img.style.width).toBe('48px');
+    expect(img.style.height).toBe('48px');
+  });
+
+  it('should fall back to default when no provider and no props', () => {
+    const { getByTestId } = render(<TestIcon />);
+    const img = getByTestId('icon-image');
+    const src = img.getAttribute('src');
+    expect(img.style.width).toBe('24px');
+    expect(src).toContain(encodeURIComponent('stroke="currentColor"'));
   });
 });

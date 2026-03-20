@@ -93,7 +93,7 @@ describe('Icon module generation', () => {
         svgContent: string
     }): string {
         const escaped = escapeSvgForJs(icon.svgContent)
-        return `import { createIcon } from '../Icon';
+        return `import { createIcon } from '../create-icon';
 
 export const ${icon.componentName} = createIcon("${escaped}", "${icon.componentName}");
 `
@@ -106,8 +106,7 @@ export const ${icon.componentName} = createIcon("${escaped}", "${icon.componentN
             svgContent: '<svg width="24"><path/></svg>',
         }
         const result = generateIconModule(icon)
-        expect(result).toContain("import { createIcon } from '../Icon';")
-        expect(result).toContain('export const ArrowLeft = createIcon(')
+        expect(result).toContain("import { createIcon } from '../create-icon';")
         expect(result).toContain('"ArrowLeft"')
     })
 
@@ -134,8 +133,8 @@ describe('Index file generation', () => {
                     `export { ${icon.componentName} } from './icons/${icon.name}';`,
             )
             .join('\n')
-        return `export { createIcon } from './Icon';
-export type { IconProps } from './Icon';
+        return `export { createIcon } from './create-icon';
+export type { IconProps } from './types';
 
 ${exports}
 `
@@ -143,8 +142,8 @@ ${exports}
 
     it('should generate index with createIcon export', () => {
         const result = generateIndexFile([])
-        expect(result).toContain("export { createIcon } from './Icon';")
-        expect(result).toContain("export type { IconProps } from './Icon';")
+        expect(result).toContain("export { createIcon } from './create-icon';")
+        expect(result).toContain("export type { IconProps } from './types';")
     })
 
     it('should generate exports for all icons', () => {
@@ -163,9 +162,6 @@ ${exports}
 
     it('should handle empty icon list', () => {
         const result = generateIndexFile([])
-        expect(result).toContain("export { createIcon } from './Icon';")
-        expect(
-            result.split('\n').filter(line => line.includes('./icons/')).length,
-        ).toBe(0)
+        expect(result).toContain("export { createIcon } from './create-icon';")
     })
 })

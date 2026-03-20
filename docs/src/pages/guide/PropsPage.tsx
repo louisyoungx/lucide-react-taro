@@ -27,8 +27,8 @@ export default function PropsPage() {
             <tr className="border-b border-border/50 hover:bg-muted/50 transition-colors">
               <td className="py-4 px-4 font-mono text-sm">color</td>
               <td className="py-4 px-4 text-sm">string</td>
-              <td className="py-4 px-4 font-mono text-sm">'currentColor'</td>
-              <td className="py-4 px-4 text-sm">图标颜色</td>
+              <td className="py-4 px-4 font-mono text-sm">-</td>
+              <td className="py-4 px-4 text-sm">图标颜色（未设置时回退为黑色）</td>
             </tr>
             <tr className="border-b border-border/50 hover:bg-muted/50 transition-colors">
               <td className="py-4 px-4 font-mono text-sm">filled</td>

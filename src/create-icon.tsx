@@ -1,29 +1,7 @@
 import { Image } from '@tarojs/components';
-import type { ImageProps } from '@tarojs/components';
-import React, { CSSProperties, useMemo } from 'react';
-
-export interface LucideTaroConfig {
-  // 用户可以通过 module augmentation 扩展此接口
-  // strictProps: true;
-}
-
-export interface StrictIconProps {
-  size: number | string;
-  color: string;
-}
-
-export interface DefaultIconProps {
-  size?: number | string;
-  color?: string;
-}
-
-export type IconProps = Omit<ImageProps, 'src' | 'style'> & {
-  filled?: boolean;
-  strokeWidth?: number | string;
-  absoluteStrokeWidth?: boolean;
-  className?: string;
-  style?: CSSProperties;
-} & (LucideTaroConfig extends { strictProps: true } ? StrictIconProps : DefaultIconProps);
+import React, { useContext, useMemo } from 'react';
+import { LucideTaroContext } from './context';
+import type { IconProps } from './types';
 
 function svgToDataUrl(svg: string): string {
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
@@ -33,8 +11,8 @@ const svgCache = new Map<string, string>();
 
 export function createIcon(svgTemplate: string, iconName?: string) {
   const IconComponent: React.FC<IconProps> = ({
-    size = 24,
-    color,
+    size: sizeProp,
+    color: colorProp,
     filled = false,
     strokeWidth,
     absoluteStrokeWidth = false,
@@ -42,6 +20,10 @@ export function createIcon(svgTemplate: string, iconName?: string) {
     style,
     ...props
   }) => {
+    const { defaultColor, defaultSize } = useContext(LucideTaroContext);
+    const size = sizeProp ?? defaultSize ?? 24;
+    const color = colorProp ?? defaultColor;
+
     const src = useMemo(() => {
       const cacheKey = `${color}|${filled}|${strokeWidth}|${absoluteStrokeWidth}|${size}`;
       const cached = svgCache.get(svgTemplate + cacheKey);

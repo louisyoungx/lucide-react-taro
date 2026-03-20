@@ -30,7 +30,7 @@ function escapeSvgForJs(svgContent: string): string {
 
 function generateIconModule(icon: IconMeta): string {
     const escaped = escapeSvgForJs(icon.svgContent)
-    return `import { createIcon } from '../Icon';
+    return `import { createIcon } from '../create-icon';
 
 export const ${icon.componentName} = /*#__PURE__*/ createIcon("${escaped}", "${icon.componentName}");
 `
@@ -44,9 +44,11 @@ function generateIndexFile(icons: IconMeta[]): string {
         })
         .join('\n')
 
-    return `import { createIcon } from './Icon';
+    return `import { createIcon } from './create-icon';
 export { createIcon };
-export type { IconProps, LucideTaroConfig } from './Icon';
+export { LucideTaroProvider } from './context';
+export type { IconProps, LucideTaroConfig } from './types';
+export type { LucideTaroProviderProps } from './context';
 
 ${iconExports}
 `
