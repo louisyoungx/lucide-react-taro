@@ -46,7 +46,7 @@ function generateIndexFile(icons: IconMeta[]): string {
 
     return `import { createIcon } from './Icon';
 export { createIcon };
-export type { IconProps } from './Icon';
+export type { IconProps, LucideTaroConfig } from './Icon';
 
 ${iconExports}
 `

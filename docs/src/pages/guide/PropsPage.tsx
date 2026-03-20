@@ -64,6 +64,28 @@ export default function PropsPage() {
         </table>
       </div>
       </section>
+
+      <section className="flex flex-col gap-4">
+        <h2 className="text-2xl font-semibold tracking-tight">强制要求 color 和 size（全局配置）</h2>
+        <p className="text-muted-foreground">
+          如果你希望在项目中强制要求每个图标都必须传递 <code className="text-sm bg-muted px-1.5 py-0.5 rounded">color</code> 和 <code className="text-sm bg-muted px-1.5 py-0.5 rounded">size</code> 属性（避免遗漏导致样式不一致），你可以通过 TypeScript 的 Module Augmentation（模块增强）来实现：
+        </p>
+        <div className="rounded-lg border bg-muted/30 p-4">
+          <pre className="text-sm overflow-x-auto"><code>{`// 在你的项目类型声明文件（如 global.d.ts 或 taro-env.d.ts）中添加：
+export {};
+declare module 'lucide-react-taro' {
+  interface LucideTaroConfig {
+    strictProps: true;
+  }
+}`}</code></pre>
+        </div>
+        <div className="rounded-lg border border-yellow-500/30 bg-yellow-500/5 p-4 text-sm text-foreground/80">
+          <strong>注意：</strong>文件中必须包含 <code className="bg-muted px-1.5 py-0.5 rounded">export {'{}'}</code> 使其成为模块文件，否则 TypeScript 会将 <code className="bg-muted px-1.5 py-0.5 rounded">declare module</code> 视为完整的模块声明而非模块增强，导致原有导出（如 <code className="bg-muted px-1.5 py-0.5 rounded">House</code>、<code className="bg-muted px-1.5 py-0.5 rounded">Settings</code> 等）丢失。
+        </div>
+        <p className="text-muted-foreground">
+          配置后，如果使用图标时不传入 <code className="text-sm bg-muted px-1.5 py-0.5 rounded">color</code> 或 <code className="text-sm bg-muted px-1.5 py-0.5 rounded">size</code>，TypeScript 将会报错。
+        </p>
+      </section>
     </div>
   );
 }

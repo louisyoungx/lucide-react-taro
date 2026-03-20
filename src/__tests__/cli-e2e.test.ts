@@ -5,7 +5,7 @@ import * as path from 'path'
 import sharp from 'sharp'
 
 const CLI_PATH = path.join(process.cwd(), 'dist/cjs/cli/index.js')
-const TEST_OUTPUT_DIR = path.join(process.cwd(), 'cli-e2e-output')
+const TEST_OUTPUT_DIR = path.join(process.cwd(), 'e2e/cli')
 
 function runCli(args: string): {
     stdout: string

@@ -126,12 +126,16 @@ import { House, Settings, User, Camera, Zap } from 'lucide-react-taro';
 
 ```tsx
 // 在你的项目类型声明文件（如 global.d.ts 或 taro-env.d.ts）中添加：
+export {};
 declare module 'lucide-react-taro' {
   interface LucideTaroConfig {
     strictProps: true;
   }
 }
 ```
+
+> **注意**：文件中必须包含 `export {}` 使其成为模块文件，否则 TypeScript 会将 `declare module` 视为完整的模块声明而非模块增强，导致原有导出（如 `House`、`Settings` 等）丢失。
+
 配置后，如果使用图标时不传入 `color` 或 `size`，TypeScript 将会报错。
 
 ## CLI 工具

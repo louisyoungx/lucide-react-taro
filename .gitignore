@@ -5,4 +5,4 @@ dist/
 .DS_Store
 coverage/
 .trae
-cli-e2e-output
+e2e/
