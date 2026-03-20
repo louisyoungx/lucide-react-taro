@@ -274,7 +274,7 @@ declare module 'lucide-react-taro' {
 import { House, Settings, User, Heart, Camera, Zap } from 'lucide-react-taro';
 
 function TabBar() {
-  const active = 'home';
+  const active: string = 'home';
   return (
     <>
       <House color={active === 'home' ? '#1890ff' : '#999'} size={24} />
