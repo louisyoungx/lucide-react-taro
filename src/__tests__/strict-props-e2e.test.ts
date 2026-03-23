@@ -336,4 +336,40 @@ const e = <House />;
         expect(failResult.stdout).toContain('color')
         expect(failResult.stdout).toContain('size')
     })
+
+    it('should allow color="inherit" and size="inherit" in strict mode', () => {
+        cleanSrcDir()
+        writeSrcFile(
+            'strict-augment.d.ts',
+            `
+export {};
+declare module 'lucide-react-taro' {
+  interface LucideTaroConfig {
+    strictProps: true;
+  }
+}
+`,
+        )
+
+        writeSrcFile(
+            'test-inherit-ok.tsx',
+            `
+import { House, Settings } from 'lucide-react-taro';
+
+// inherit defers to LucideTaroProvider defaults
+const a = <House color="inherit" size="inherit" />;
+const b = <Settings color="inherit" size={24} />;
+const c = <House color="#333" size="inherit" />;
+`,
+        )
+
+        const configPath = writeTsconfig([
+            'strict-augment.d.ts',
+            'test-inherit-ok.tsx',
+        ])
+        const result = runTsc(configPath)
+
+        expect(result.exitCode).toBe(0)
+    })
+
 })

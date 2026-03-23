@@ -19,10 +19,10 @@ export function createIcon(svgTemplate: string, iconName?: string) {
     className,
     style,
     ...props
-  }) => {
+  }: IconProps) => {
     const { defaultColor, defaultSize } = useContext(LucideTaroContext);
-    const size = sizeProp ?? defaultSize ?? 24;
-    const color = colorProp ?? defaultColor;
+    const size = sizeProp === 'inherit' ? (defaultSize ?? 24) : (sizeProp ?? defaultSize ?? 24);
+    const color = (colorProp && colorProp !== 'inherit') ? colorProp : defaultColor;
 
     const src = useMemo(() => {
       const cacheKey = `${color}|${filled}|${strokeWidth}|${absoluteStrokeWidth}|${size}`;

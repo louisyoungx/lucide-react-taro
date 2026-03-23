@@ -7,8 +7,10 @@ export interface LucideTaroConfig {
 }
 
 export interface StrictIconProps {
-  size: number | string;
-  color: string;
+  /** 传入 'inherit' 可使用 LucideTaroProvider 提供的默认尺寸 */
+  size: number | 'inherit' | (string & {});
+  /** 传入 'inherit' 可使用 LucideTaroProvider 提供的默认颜色 */
+  color: 'inherit' | (string & {});
 }
 
 export interface DefaultIconProps {

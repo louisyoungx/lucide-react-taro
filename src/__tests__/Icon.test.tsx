@@ -246,3 +246,54 @@ describe('LucideTaroProvider', () => {
     expect(src).toContain(encodeURIComponent('stroke="currentColor"'));
   });
 });
+
+describe('Inherit value', () => {
+  const TestIcon = createIcon(mockSvgTemplate, 'InheritTestIcon');
+
+  it('should use provider defaultColor when color="inherit"', () => {
+    const { getByTestId } = render(
+      <LucideTaroProvider defaultColor="#00ff00">
+        <TestIcon color="inherit" />
+      </LucideTaroProvider>
+    );
+    const src = getByTestId('icon-image').getAttribute('src');
+    expect(src).toContain(encodeURIComponent('stroke="#00ff00"'));
+    expect(src).not.toContain(encodeURIComponent('stroke="currentColor"'));
+  });
+
+  it('should use provider defaultSize when size="inherit"', () => {
+    const { getByTestId } = render(
+      <LucideTaroProvider defaultSize={32}>
+        <TestIcon size="inherit" />
+      </LucideTaroProvider>
+    );
+    const img = getByTestId('icon-image');
+    expect(img.style.width).toBe('32px');
+    expect(img.style.height).toBe('32px');
+  });
+
+  it('should fall back to default size (24) when size="inherit" without provider', () => {
+    const { getByTestId } = render(<TestIcon size="inherit" />);
+    const img = getByTestId('icon-image');
+    expect(img.style.width).toBe('24px');
+    expect(img.style.height).toBe('24px');
+  });
+
+  it('should fall back to no color when color="inherit" without provider', () => {
+    const { getByTestId } = render(<TestIcon color="inherit" />);
+    const src = getByTestId('icon-image').getAttribute('src');
+    expect(src).toContain(encodeURIComponent('stroke="currentColor"'));
+  });
+
+  it('should use both provider defaults with color="inherit" size="inherit"', () => {
+    const { getByTestId } = render(
+      <LucideTaroProvider defaultColor="#ff3e98" defaultSize={48}>
+        <TestIcon color="inherit" size="inherit" />
+      </LucideTaroProvider>
+    );
+    const img = getByTestId('icon-image');
+    const src = img.getAttribute('src');
+    expect(img.style.width).toBe('48px');
+    expect(src).toContain(encodeURIComponent('stroke="#ff3e98"'));
+  });
+});

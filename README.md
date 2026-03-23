@@ -125,15 +125,15 @@ import { LucideTaroProvider, House, Settings, Camera } from 'lucide-react-taro';
 
 ## API
 
-| 属性                | 类型             | 默认值 | 说明                                   |
-| ------------------- | ---------------- | ------ | -------------------------------------- |
-| size                | number \| string | 24     | 图标尺寸                               |
-| color               | string           | -      | 图标颜色（未设置时回退为黑色）         |
-| filled              | boolean          | false  | 是否渲染为实心（fill=currentColor）    |
-| strokeWidth         | number \| string | 2      | 描边宽度                               |
-| absoluteStrokeWidth | boolean          | false  | 绝对描边宽度，启用后描边不随 size 缩放 |
-| className           | string           | -      | CSS 类名                               |
-| style               | CSSProperties    | -      | 自定义样式                             |
+| 属性                | 类型             | 默认值 | 说明                                          |
+| ------------------- | ---------------- | ------ | --------------------------------------------- |
+| size                | number \| string | 24     | 图标尺寸，传 `"inherit"` 使用 Provider 默认值 |
+| color               | string           | -      | 图标颜色，传 `"inherit"` 使用 Provider 默认值 |
+| filled              | boolean          | false  | 是否渲染为实心（fill=currentColor）           |
+| strokeWidth         | number \| string | 2      | 描边宽度                                      |
+| absoluteStrokeWidth | boolean          | false  | 绝对描边宽度，启用后描边不随 size 缩放        |
+| className           | string           | -      | CSS 类名                                      |
+| style               | CSSProperties    | -      | 自定义样式                                    |
 
 同时支持 Taro `Image` 组件的其他属性。
 
@@ -154,6 +154,22 @@ declare module 'lucide-react-taro' {
 > **注意**：文件中必须包含 `export {}` 使其成为模块文件，否则 TypeScript 会将 `declare module` 视为完整的模块声明而非模块增强，导致原有导出（如 `House`、`Settings` 等）丢失。
 
 配置后，如果使用图标时不传入 `color` 或 `size`，TypeScript 将会报错。
+
+#### 配合 LucideTaroProvider 使用 `"inherit"`
+
+在 `strictProps` 模式下，如果已通过 `LucideTaroProvider` 设置了默认值，可以传入 `"inherit"` 来使用 Provider 的默认颜色和尺寸，而不必在每个图标上重复传值：
+
+```tsx
+import { LucideTaroProvider, House, Settings } from 'lucide-react-taro';
+
+<LucideTaroProvider defaultColor="#666" defaultSize={20}>
+  {/* inherit 表示使用 Provider 的默认值 */}
+  <House color="inherit" size="inherit" />
+
+  {/* 也可以只 inherit 其中一个，另一个显式指定 */}
+  <Settings color="inherit" size={32} />
+</LucideTaroProvider>
+```
 
 ## CLI 工具
 
