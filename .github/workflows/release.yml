@@ -1,0 +1,114 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: Version bump type
+        required: true
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - custom
+      custom_version:
+        description: Custom version when release_type is custom
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Ensure latest main commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          current_commit="$(git rev-parse HEAD)"
+          latest_main_commit="$(git rev-parse origin/main)"
+
+          if [[ "$current_commit" != "$latest_main_commit" ]]; then
+            echo "Release must run from the latest commit on main." >&2
+            echo "Current: $current_commit" >&2
+            echo "Latest:  $latest_main_commit" >&2
+            exit 1
+          fi
+
+      - name: Resolve release version
+        id: release-input
+        shell: bash
+        run: |
+          set -euo pipefail
+          release_type='${{ inputs.release_type }}'
+          custom_version='${{ inputs.custom_version }}'
+
+          if [[ "$release_type" == "custom" ]]; then
+            if [[ -z "$custom_version" ]]; then
+              echo "custom_version is required when release_type is custom" >&2
+              exit 1
+            fi
+            echo "value=$custom_version" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=$release_type" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Configure git author
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Run full test suite
+        run: pnpm test
+
+      - name: Publish packages
+        run: pnpm release "${{ steps.release-input.outputs.value }}"
+
+      - name: Read released version
+        id: release-version
+        run: echo "value=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Push version commit
+        run: git push origin HEAD:${{ github.ref_name }}
+
+      - name: Create and push git tag
+        run: |
+          git tag "v${{ steps.release-version.outputs.value }}"
+          git push origin "v${{ steps.release-version.outputs.value }}"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.release-version.outputs.value }}
+          generate_release_notes: true
