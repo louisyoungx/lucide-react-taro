@@ -8,7 +8,7 @@ const program = new Command()
 
 program
   .name('taro-lucide-show')
-  .description('Show Lucide icon in terminal')
+  .description('Preview a Lucide icon directly in the terminal with custom size and color')
   .argument('<name>', 'Icon name (e.g. ArrowUp, arrow-up)')
   .option('-s, --size <number>', 'Size of the preview', '40')
   .option('-c, --color <string>', 'Color of the icon', '#ffffff')

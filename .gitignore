@@ -6,3 +6,4 @@ dist/
 coverage/
 .trae
 e2e/
+packages/*/README.md

@@ -6,7 +6,7 @@ const program = new Command()
 
 program
     .name('taro-lucide-tabbar')
-    .description('Generate PNG icons for WeChat miniprogram tabbar')
+    .description('Generate WeChat miniprogram TabBar PNG icons from Lucide names')
     .version('1.0.0')
     .argument('<icons...>', 'Icon names (e.g., House Settings User)')
     .option(

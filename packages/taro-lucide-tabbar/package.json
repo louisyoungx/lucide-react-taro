@@ -1,7 +1,7 @@
 {
   "name": "taro-lucide-tabbar",
   "version": "1.5.0",
-  "description": "Generate PNG icons for WeChat miniprogram tabbar from Lucide icons",
+  "description": "CLI for generating WeChat miniprogram TabBar PNG icons from Lucide with normal and active states for Taro projects",
   "main": "dist/index.js",
   "bin": {
     "taro-lucide-tabbar": "./dist/index.js"
@@ -20,9 +20,23 @@
     "lucide",
     "taro",
     "cli",
-    "tabbar"
+    "tabbar",
+    "icons",
+    "png",
+    "wechat",
+    "miniprogram"
   ],
+  "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/louisyoungx/lucide-react-taro.git",
+    "directory": "packages/taro-lucide-tabbar"
+  },
+  "homepage": "https://lucide.rocke.top",
+  "bugs": {
+    "url": "https://github.com/louisyoungx/lucide-react-taro/issues"
+  },
   "devDependencies": {
     "@lucide-react-taro/generate": "workspace:*"
   },

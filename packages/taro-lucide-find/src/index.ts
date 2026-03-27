@@ -7,7 +7,7 @@ const program = new Command()
 
 program
     .name('taro-lucide-find')
-    .description('Find Lucide icons')
+    .description('Find Lucide icon names with exact match, fuzzy suggestions, list output, and JSON mode')
     .argument('[queries...]', 'Search queries')
     .option('-e, --exact', 'Exact match only')
     .option('-l, --list', 'List all icons')

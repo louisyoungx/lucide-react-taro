@@ -1,7 +1,7 @@
 {
   "name": "taro-lucide-show",
   "version": "1.5.0",
-  "description": "Preview Lucide icons in the terminal",
+  "description": "CLI for previewing Lucide icons directly in the terminal with custom size and color before using them in Taro projects",
   "main": "dist/index.js",
   "bin": {
     "taro-lucide-show": "./dist/index.js"
@@ -18,9 +18,23 @@
     "lucide",
     "taro",
     "cli",
-    "preview"
+    "preview",
+    "icons",
+    "terminal",
+    "wechat",
+    "miniprogram"
   ],
+  "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/louisyoungx/lucide-react-taro.git",
+    "directory": "packages/taro-lucide-show"
+  },
+  "homepage": "https://lucide.rocke.top",
+  "bugs": {
+    "url": "https://github.com/louisyoungx/lucide-react-taro/issues"
+  },
   "devDependencies": {
     "@lucide-react-taro/generate": "workspace:*"
   },

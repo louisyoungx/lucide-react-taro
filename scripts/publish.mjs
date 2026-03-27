@@ -1,4 +1,5 @@
 import fs from 'node:fs'
+import path from 'node:path'
 import { spawnSync } from 'node:child_process'
 import readline from 'node:readline/promises'
 import { stdin as input, stdout as output } from 'node:process'
@@ -10,6 +11,13 @@ const VERSION_FILES = [
   'packages/taro-lucide-tabbar/package.json',
   'packages/taro-lucide-find/package.json',
   'packages/taro-lucide-show/package.json',
+]
+
+const PUBLISH_PACKAGES = [
+  'packages/lucide-react-taro',
+  'packages/taro-lucide-tabbar',
+  'packages/taro-lucide-find',
+  'packages/taro-lucide-show',
 ]
 
 const VERSION_CHOICES = {
@@ -78,6 +86,25 @@ function ensureCleanWorkingTree() {
   }
 }
 
+function syncPackageReadmes() {
+  const rootReadme = fs.readFileSync('README.md', 'utf8')
+
+  for (const packageDir of PUBLISH_PACKAGES) {
+    const targetPath = path.join(packageDir, 'README.md')
+    fs.writeFileSync(targetPath, rootReadme)
+  }
+}
+
+function cleanupPackageReadmes() {
+  for (const packageDir of PUBLISH_PACKAGES) {
+    const targetPath = path.join(packageDir, 'README.md')
+
+    if (fs.existsSync(targetPath)) {
+      fs.rmSync(targetPath)
+    }
+  }
+}
+
 function commitVersionChanges(version) {
   const hasVersionDiff =
     spawnSync('git', ['diff', '--quiet', '--', ...VERSION_FILES], {
@@ -137,15 +164,22 @@ async function main() {
   const strategy = process.argv[2] || (await promptVersionStrategy())
 
   ensureCleanWorkingTree()
-  run('node', ['scripts/version-packages.mjs', strategy])
-  const version = readRootVersion()
-  run('pnpm', ['run', 'build:lib'])
-  run('pnpm', ['--filter', 'lucide-react-taro', 'publish', '--access', 'public', '--no-git-checks'])
-  run('pnpm', ['run', 'build:cli'])
-  run('pnpm', ['--filter', 'taro-lucide-tabbar', 'publish', '--access', 'public', '--no-git-checks'])
-  run('pnpm', ['--filter', 'taro-lucide-find', 'publish', '--access', 'public', '--no-git-checks'])
-  run('pnpm', ['--filter', 'taro-lucide-show', 'publish', '--access', 'public', '--no-git-checks'])
-  commitVersionChanges(version)
+
+  try {
+    run('node', ['scripts/version-packages.mjs', strategy])
+    const version = readRootVersion()
+    syncPackageReadmes()
+    run('pnpm', ['run', 'build:lib'])
+    run('pnpm', ['--filter', 'lucide-react-taro', 'publish', '--access', 'public', '--no-git-checks'])
+    run('pnpm', ['run', 'build:cli'])
+    run('pnpm', ['--filter', 'taro-lucide-tabbar', 'publish', '--access', 'public', '--no-git-checks'])
+    run('pnpm', ['--filter', 'taro-lucide-find', 'publish', '--access', 'public', '--no-git-checks'])
+    run('pnpm', ['--filter', 'taro-lucide-show', 'publish', '--access', 'public', '--no-git-checks'])
+    cleanupPackageReadmes()
+    commitVersionChanges(version)
+  } finally {
+    cleanupPackageReadmes()
+  }
 }
 
 main().catch(error => {
