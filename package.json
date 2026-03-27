@@ -14,7 +14,7 @@
     "build": "pnpm run build:lib && pnpm run build:cli && pnpm run build:docs",
     "bump": "node scripts/version-packages.mjs",
     "clean": "pnpm --filter lucide-react-taro clean && pnpm --filter taro-lucide-tabbar clean && pnpm --filter taro-lucide-find clean && pnpm --filter taro-lucide-show clean && rm -rf docs/dist .lucide-cache",
-    "publish": "node scripts/publish.mjs",
+    "release": "node scripts/publish.mjs",
     "test": "pnpm --filter lucide-react-taro test && pnpm --filter taro-lucide-tabbar test",
     "test:watch": "pnpm --filter lucide-react-taro test:watch",
     "test:coverage": "pnpm --filter lucide-react-taro test:coverage && pnpm --filter taro-lucide-tabbar test:coverage",
