@@ -15,6 +15,7 @@ export default function IconDetailPage() {
   const [color, setColor] = useState("#000000");
   const [strokeWidth, setStrokeWidth] = useState(2);
   const [filled, setFilled] = useState(false);
+  const [absoluteStrokeWidth, setAbsoluteStrokeWidth] = useState(false);
 
   const presetColors = [
     "#000000", // Black
@@ -57,7 +58,13 @@ export default function IconDetailPage() {
 
       <div className="flex flex-col lg:flex-row gap-12">
         <div className="flex-1 flex items-center justify-center min-h-[400px] rounded-xl border bg-card/50 backdrop-blur-sm shadow-sm">
-          <Icon size={size} color={color} strokeWidth={strokeWidth} filled={filled} />
+          <Icon
+            size={size}
+            color={color}
+            strokeWidth={strokeWidth}
+            filled={filled}
+            absoluteStrokeWidth={absoluteStrokeWidth}
+          />
         </div>
 
         <div className="flex-1 flex flex-col gap-8">
@@ -143,19 +150,33 @@ export default function IconDetailPage() {
                 填充 (Filled)
               </label>
             </div>
+
+            <div className="flex items-center space-x-2">
+              <Switch
+                id="absolute-stroke-width"
+                checked={absoluteStrokeWidth}
+                onCheckedChange={setAbsoluteStrokeWidth}
+              />
+              <label
+                htmlFor="absolute-stroke-width"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                绝对描边宽度 (absoluteStrokeWidth)
+              </label>
+            </div>
           </div>
 
-          <div className="flex flex-col gap-3 min-h-[218px]">
+          <div className="flex flex-col gap-3 min-h-[246px]">
             <div className="text-sm font-semibold">代码示例</div>
             <CodeBlock
-              className="min-h-[194px]"
+              className="min-h-[214px]"
               language="tsx"
               code={`import { ${iconName} } from 'lucide-react-taro';
 
 <${iconName} 
   size={${size}} 
   color="${color}" 
-  strokeWidth={${strokeWidth}}${filled ? '\n  filled' : ''} 
+  strokeWidth={${strokeWidth}}${filled ? '\n  filled' : ''}${absoluteStrokeWidth ? '\n  absoluteStrokeWidth' : ''} 
 />`}
             />
           </div>
