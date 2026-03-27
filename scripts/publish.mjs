@@ -116,7 +116,7 @@ function commitVersionChanges(version) {
   }
 
   run('git', ['add', ...VERSION_FILES])
-  run('git', ['commit', '-m', `chore: release v${version}`])
+  run('git', ['commit', '-m', `release: ${version}`])
 }
 
 async function promptVersionStrategy() {
