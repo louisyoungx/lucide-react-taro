@@ -1,6 +1,6 @@
 {
   "name": "taro-lucide-show",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Preview Lucide icons in the terminal",
   "main": "dist/index.js",
   "bin": {

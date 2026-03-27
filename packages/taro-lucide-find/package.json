@@ -1,6 +1,6 @@
 {
   "name": "taro-lucide-find",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Find Lucide icon names for Taro projects",
   "main": "dist/index.js",
   "bin": {

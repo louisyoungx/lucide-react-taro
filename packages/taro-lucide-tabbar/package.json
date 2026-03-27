@@ -1,6 +1,6 @@
 {
   "name": "taro-lucide-tabbar",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Generate PNG icons for WeChat miniprogram tabbar from Lucide icons",
   "main": "dist/index.js",
   "bin": {
