@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Package, Terminal, Zap, Bot, Image as ImageIcon, Paintbrush, Sparkles, TerminalSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CodeBlock } from "@/components/ui/CodeBlock";
-import { CommandTabs } from "@/components/ui/CommandTabs";
+import { CodeBlock } from "@/components/CodeBlock";
+import { CommandTabs } from "@/components/CommandTabs";
 import { HeroIcons } from "@/components/HeroIcons";
 
 export default function HomePage() {

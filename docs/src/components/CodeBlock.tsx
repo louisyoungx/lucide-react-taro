@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { codeToHtml } from 'shiki';
 import { Check, Copy } from 'lucide-react';
-import { Button } from './button';
+
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 interface CodeBlockProps {
@@ -16,6 +17,7 @@ export function CodeBlock({ code, language = 'tsx', className }: CodeBlockProps)
 
   useEffect(() => {
     let isMounted = true;
+
     async function highlight() {
       try {
         const result = await codeToHtml(code, {
@@ -25,6 +27,7 @@ export function CodeBlock({ code, language = 'tsx', className }: CodeBlockProps)
             dark: 'github-dark',
           },
         });
+
         if (isMounted) {
           setHtml(result);
         }
@@ -32,7 +35,9 @@ export function CodeBlock({ code, language = 'tsx', className }: CodeBlockProps)
         console.error('Failed to highlight code:', error);
       }
     }
+
     highlight();
+
     return () => {
       isMounted = false;
     };

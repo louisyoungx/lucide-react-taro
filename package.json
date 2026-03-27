@@ -10,7 +10,7 @@
   "scripts": {
     "build:lib": "pnpm --filter lucide-react-taro build",
     "build:cli": "pnpm --filter taro-lucide-tabbar build && pnpm --filter taro-lucide-find build && pnpm --filter taro-lucide-show build",
-    "build:docs": "pnpm -C docs build",
+    "build:docs": "pnpm run build:lib && pnpm -C docs build",
     "build": "pnpm run build:lib && pnpm run build:cli && pnpm run build:docs",
     "bump": "node scripts/version-packages.mjs",
     "clean": "pnpm --filter lucide-react-taro clean && pnpm --filter taro-lucide-tabbar clean && pnpm --filter taro-lucide-find clean && pnpm --filter taro-lucide-show clean && rm -rf docs/dist .lucide-cache",
@@ -18,7 +18,7 @@
     "test": "pnpm --filter lucide-react-taro test && pnpm --filter taro-lucide-tabbar test",
     "test:watch": "pnpm --filter lucide-react-taro test:watch",
     "test:coverage": "pnpm --filter lucide-react-taro test:coverage && pnpm --filter taro-lucide-tabbar test:coverage",
-    "dev:docs": "pnpm run build:lib && pnpm -C docs dev"
+    "dev:docs": "pnpm -C docs dev"
   },
   "devDependencies": {
     "@tarojs/components": "4.1.9",

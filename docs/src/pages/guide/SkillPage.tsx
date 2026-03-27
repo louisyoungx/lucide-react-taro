@@ -1,4 +1,5 @@
-import { CodeBlock } from "@/components/ui/CodeBlock";
+import { GuidePager } from "@/components/guide/GuidePager";
+import { CodeBlock } from "@/components/CodeBlock";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 
@@ -49,6 +50,10 @@ export default function SkillPage() {
           </ul>
         </div>
       </section>
+
+      <GuidePager
+        previous={{ title: "CLI 工具", href: "/guide/cli" }}
+      />
     </div>
   );
 }

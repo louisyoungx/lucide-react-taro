@@ -1,3 +1,5 @@
+import { GuidePager } from "@/components/guide/GuidePager";
+
 export default function PropsPage() {
   return (
     <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -86,6 +88,11 @@ declare module 'lucide-react-taro' {
           配置后，如果使用图标时不传入 <code className="text-sm bg-muted px-1.5 py-0.5 rounded">color</code> 或 <code className="text-sm bg-muted px-1.5 py-0.5 rounded">size</code>，TypeScript 将会报错。
         </p>
       </section>
+
+      <GuidePager
+        previous={{ title: "基础用法", href: "/guide/usage" }}
+        next={{ title: "CLI 工具", href: "/guide/cli" }}
+      />
     </div>
   );
 }

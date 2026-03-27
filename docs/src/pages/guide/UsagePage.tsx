@@ -1,4 +1,5 @@
-import { CodeBlock } from "@/components/ui/CodeBlock";
+import { GuidePager } from "@/components/guide/GuidePager";
+import { CodeBlock } from "@/components/CodeBlock";
 
 export default function UsagePage() {
   return (
@@ -126,6 +127,11 @@ import { House, Settings, User } from 'lucide-react-taro';
 import { House } from 'lucide-react-taro/icons/house';`}
         />
       </section>
+
+      <GuidePager
+        previous={{ title: "安装", href: "/guide/installation" }}
+        next={{ title: "属性", href: "/guide/props" }}
+      />
     </div>
   );
 }

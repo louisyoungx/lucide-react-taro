@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import * as LucideIcons from "lucide-react-taro";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { CodeBlock } from "@/components/ui/CodeBlock";
+import { CodeBlock } from "@/components/CodeBlock";
 import { ArrowLeft } from "lucide-react";
 
 export default function IconDetailPage() {

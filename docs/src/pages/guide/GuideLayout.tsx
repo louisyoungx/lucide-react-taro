@@ -7,10 +7,6 @@ const sidebarNavItems = [
     href: "/guide/installation",
   },
   {
-    title: "渲染原理 (Rendering)",
-    href: "/guide/rendering",
-  },
-  {
     title: "基础用法 (Usage)",
     href: "/guide/usage",
   },

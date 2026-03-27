@@ -1,5 +1,5 @@
-import { CodeBlock } from "@/components/ui/CodeBlock";
-import { CommandTabs } from "@/components/ui/CommandTabs";
+import { GuidePager } from "@/components/guide/GuidePager";
+import { CommandTabs } from "@/components/CommandTabs";
 
 export default function CliPage() {
   return (
@@ -59,6 +59,11 @@ export default function CliPage() {
           />
         </div>
       </section>
+
+      <GuidePager
+        previous={{ title: "属性", href: "/guide/props" }}
+        next={{ title: "AI 助手技能", href: "/guide/skill" }}
+      />
     </div>
   );
 }
