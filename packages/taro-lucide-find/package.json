@@ -1,0 +1,31 @@
+{
+  "name": "taro-lucide-find",
+  "version": "1.4.1",
+  "description": "Find Lucide icon names for Taro projects",
+  "main": "dist/index.js",
+  "bin": {
+    "taro-lucide-find": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "lucide-react-taro-generate build-cli --package-dir . --entry src/index.ts --outfile dist/index.js",
+    "clean": "rm -rf dist src/icon-list.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "lucide",
+    "taro",
+    "cli",
+    "search"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "@lucide-react-taro/generate": "workspace:*"
+  },
+  "dependencies": {
+    "commander": "^14.0.0",
+    "fuse.js": "^7.1.0"
+  }
+}

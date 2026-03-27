@@ -133,7 +133,10 @@ export default function HomePage() {
           <CodeBlock
             className="order-2 lg:order-1"
             language="bash"
-            code={`# 生成单个图标
+            code={`# 直接运行独立 CLI 包
+npx taro-lucide-tabbar --help
+
+# 生成单个图标
 npx taro-lucide-tabbar House -c "#999999"
 
 # 生成附带选中状态的图标

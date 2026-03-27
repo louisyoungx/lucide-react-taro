@@ -173,6 +173,8 @@ import { LucideTaroProvider, House, Settings } from 'lucide-react-taro';
 
 ## CLI 工具
 
+`taro-lucide-tabbar`、`taro-lucide-find` 和 `taro-lucide-show` 现已作为独立 CLI 包发布，可直接通过 `npx` 运行。
+
 微信小程序的 TabBar 不支持 base64 或 SVG 图片，只能使用本地 PNG 文件。本库提供了 CLI 工具来生成 TabBar 所需的 PNG 图标。
 
 ### 生成 TabBar 图标
@@ -284,21 +286,14 @@ npm test
 ### 项目结构
 
 ```
-├── src/
-│   ├── context.tsx       # 上下文（LucideTaroProvider）
-│   ├── types.ts          # 类型定义
-│   ├── create-icon.tsx   # 核心图标组件
-│   ├── index.ts          # 导出入口（自动生成）
-│   ├── icons/            # 图标模块（自动生成）
-│   ├── cli/              # CLI 工具
-│   │   ├── index.ts      # CLI 入口
-│   │   ├── create-tabbar-icon.ts  # TabBar 图标生成命令
-│   │   └── utils.ts      # 工具函数
-│   └── __tests__/        # 单元测试
-├── scripts/
-│   ├── fetch-icons.ts    # 拉取 Lucide 图标
-│   └── generate.ts       # 生成图标模块
-└── dist/                 # 构建产物
+├── packages/
+│   ├── lucide-react-taro/         # 主库源码与测试
+│   ├── generate/                  # 共享构建工具包
+│   ├── taro-lucide-tabbar/        # TabBar CLI 包
+│   ├── taro-lucide-find/          # 图标查找 CLI 包
+│   └── taro-lucide-show/          # 终端预览 CLI 包
+├── docs/                          # 文档站
+└── .lucide-cache/                 # Lucide 上游图标缓存
 ```
 
 ## License
