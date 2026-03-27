@@ -32,8 +32,8 @@ export default function GuideLayout() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto py-8 px-4 md:px-8">
-      <aside className="md:w-64 shrink-0">
+    <div className="flex w-full flex-col gap-8 py-8 px-4 md:flex-row md:px-0">
+      <aside className="md:w-52 shrink-0 md:border-r md:border-border/70 md:pr-5">
         <nav className="flex md:flex-col gap-2 overflow-x-auto pb-4 md:pb-0 md:sticky md:top-24 scrollbar-hide">
           {sidebarNavItems.map((item) => (
               <NavLink
