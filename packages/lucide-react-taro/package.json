@@ -1,6 +1,6 @@
 {
   "name": "lucide-react-taro",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Lucide icon components for Taro with dynamic color support, tree shaking, filled icons, and WeChat miniprogram compatibility",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

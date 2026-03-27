@@ -1,6 +1,6 @@
 {
   "name": "taro-lucide-show",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "CLI for previewing Lucide icons directly in the terminal with custom size and color before using them in Taro projects",
   "main": "dist/index.js",
   "bin": {
