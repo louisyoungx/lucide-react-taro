@@ -1,0 +1,33 @@
+{
+  "name": "taro-lucide-tabbar",
+  "version": "1.4.1",
+  "description": "Generate PNG icons for WeChat miniprogram tabbar from Lucide icons",
+  "main": "dist/index.js",
+  "bin": {
+    "taro-lucide-tabbar": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "lucide-react-taro-generate build-cli --package-dir . --entry src/index.ts --outfile dist/index.js",
+    "clean": "rm -rf dist e2e",
+    "test": "npm run build && vitest run src/__tests__/cli-e2e.test.ts src/__tests__/utils.test.ts",
+    "test:coverage": "npm run build && vitest run --coverage src/__tests__/cli-e2e.test.ts src/__tests__/utils.test.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "lucide",
+    "taro",
+    "cli",
+    "tabbar"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "@lucide-react-taro/generate": "workspace:*"
+  },
+  "dependencies": {
+    "commander": "^14.0.0",
+    "sharp": "^0.33.0"
+  }
+}

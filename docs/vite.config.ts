@@ -42,7 +42,7 @@ export default defineConfig({
                 new URL('./src/shims/taro-components.tsx', import.meta.url),
             ),
             'lucide-react-taro': fileURLToPath(
-                new URL('../src/index.ts', import.meta.url),
+                new URL('../packages/lucide-react-taro/src/index.ts', import.meta.url),
             ),
         },
     },

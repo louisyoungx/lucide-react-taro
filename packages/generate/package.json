@@ -1,0 +1,15 @@
+{
+  "name": "@lucide-react-taro/generate",
+  "private": true,
+  "version": "1.4.1",
+  "type": "module",
+  "bin": {
+    "lucide-react-taro-generate": "./bin/lucide-react-taro-generate.js"
+  },
+  "dependencies": {
+    "esbuild": "^0.27.3",
+    "rollup": "^4.59.0",
+    "rollup-plugin-dts": "^6.3.0",
+    "tsx": "^4.20.6"
+  }
+}
