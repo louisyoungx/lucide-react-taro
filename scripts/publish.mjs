@@ -81,9 +81,13 @@ async function promptVersionStrategy() {
 async function main() {
   const strategy = process.argv[2] || (await promptVersionStrategy())
 
-  run('pnpm', ['run', 'bump', '--', strategy])
-  run('pnpm', ['run', 'publish:lib'])
-  run('pnpm', ['run', 'publish:cli'])
+  run('node', ['scripts/version-packages.mjs', strategy])
+  run('pnpm', ['run', 'build:lib'])
+  run('pnpm', ['--filter', 'lucide-react-taro', 'publish', '--access', 'public'])
+  run('pnpm', ['run', 'build:cli'])
+  run('pnpm', ['--filter', 'taro-lucide-tabbar', 'publish', '--access', 'public'])
+  run('pnpm', ['--filter', 'taro-lucide-find', 'publish', '--access', 'public'])
+  run('pnpm', ['--filter', 'taro-lucide-show', 'publish', '--access', 'public'])
 }
 
 main().catch(error => {

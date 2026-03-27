@@ -13,6 +13,7 @@
     "build": "lucide-react-taro-generate build-cli --package-dir . --entry src/index.ts --outfile dist/index.js",
     "clean": "rm -rf dist e2e",
     "test": "npm run build && vitest run src/__tests__/cli-e2e.test.ts src/__tests__/utils.test.ts",
+    "test:coverage": "npm run build && vitest run --coverage src/__tests__/cli-e2e.test.ts src/__tests__/utils.test.ts",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
