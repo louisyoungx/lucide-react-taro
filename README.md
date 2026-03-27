@@ -173,27 +173,25 @@ import { LucideTaroProvider, House, Settings } from 'lucide-react-taro';
 
 ## CLI 工具
 
-`taro-lucide-tabbar`、`taro-lucide-find` 和 `taro-lucide-show` 现已作为独立 CLI 包发布，可直接通过 `npx` 运行。
-
 微信小程序的 TabBar 不支持 base64 或 SVG 图片，只能使用本地 PNG 文件。本库提供了 CLI 工具来生成 TabBar 所需的 PNG 图标。
 
 ### 生成 TabBar 图标
 
 ```bash
 # 生成单个图标
-npx taro-lucide-tabbar House -c "#999999"
+pnpm dlx taro-lucide-tabbar House -c "#999999"
 
 # 生成带选中状态的图标（推荐）
-npx taro-lucide-tabbar House -c "#999999" -a "#1890ff"
+pnpm dlx taro-lucide-tabbar House -c "#999999" -a "#1890ff"
 
 # 批量生成多个图标
-npx taro-lucide-tabbar House Settings User -c "#999999" -a "#1890ff"
+pnpm dlx taro-lucide-tabbar House Settings User -c "#999999" -a "#1890ff"
 
 # 指定输出目录
-npx taro-lucide-tabbar House -c "#999999" -o ./src/assets/tabbar
+pnpm dlx taro-lucide-tabbar House -c "#999999" -o ./src/assets/tabbar
 
 # 指定尺寸（小程序推荐 81x81）
-npx taro-lucide-tabbar House -c "#999999" -s 81
+pnpm dlx taro-lucide-tabbar House -c "#999999" -s 81
 ```
 
 ### CLI 参数
@@ -246,16 +244,16 @@ export default defineAppConfig({
 
 ```bash
 # 模糊查找（默认）
-npx taro-lucide-find arrow
+pnpm dlx taro-lucide-find arrow
 
 # 精确查找
-npx taro-lucide-find arrow-up --exact
+pnpm dlx taro-lucide-find arrow-up --exact
 
 # 批量验证（输出 JSON，适合 AI 调用）
-npx taro-lucide-find arrow-up user settings arw --json
+pnpm dlx taro-lucide-find arrow-up user settings arw --json
 
 # 列出所有图标
-npx taro-lucide-find --list
+pnpm dlx taro-lucide-find --list
 ```
 
 ### 图标预览工具
@@ -264,10 +262,10 @@ npx taro-lucide-find --list
 
 ```bash
 # 预览图标
-npx taro-lucide-show ArrowUp
+pnpm dlx taro-lucide-show ArrowUp
 
 # 自定义大小和颜色
-npx taro-lucide-show Heart -c "#ff3e98" -s 30
+pnpm dlx taro-lucide-show Heart -c "#ff3e98" -s 30
 ```
 
 ## 开发

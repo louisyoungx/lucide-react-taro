@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Package, Terminal, Zap, Bot, Image as ImageIcon, Paintbrush, Sparkles, TerminalSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { CommandTabs } from "@/components/ui/CommandTabs";
 import { HeroIcons } from "@/components/HeroIcons";
 
 export default function HomePage() {
@@ -130,21 +131,15 @@ export default function HomePage() {
       {/* TabBar Generator Section */}
       <section className="mt-10 border-t pt-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <CodeBlock
+          <CommandTabs
             className="order-2 lg:order-1"
-            language="bash"
-            code={`# 直接运行独立 CLI 包
-npx taro-lucide-tabbar --help
-
-# 生成单个图标
-npx taro-lucide-tabbar House -c "#999999"
-
-# 生成附带选中状态的图标
-npx taro-lucide-tabbar House -c "#999999" -a "#1890ff"
-
-# 批量生成多个图标
-npx taro-lucide-tabbar House Settings User \\
-  -c "#999999" -a "#1890ff" -s 81`}
+            packageName="taro-lucide-tabbar"
+            commands={[
+              '--help',
+              'House -c "#999999"',
+              'House -c "#999999" -a "#1890ff"',
+              'House Settings User -c "#999999" -a "#1890ff" -s 81',
+            ]}
           />
           <div className="order-1 lg:order-2 flex flex-col gap-6">
             <h2 className="text-3xl font-bold tracking-tight">

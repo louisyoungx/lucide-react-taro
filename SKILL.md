@@ -96,13 +96,13 @@ import { House } from 'lucide-react-taro/icons/house';
 
 ```bash
 # 模糊查找（默认）
-npx taro-lucide-find arrow
+pnpm dlx taro-lucide-find arrow
 
 # 精确查找
-npx taro-lucide-find arrow-up --exact
+pnpm dlx taro-lucide-find arrow-up --exact
 
 # 列出所有图标
-npx taro-lucide-find --list
+pnpm dlx taro-lucide-find --list
 ```
 
 ### 验证图标
@@ -110,7 +110,7 @@ npx taro-lucide-find --list
 推荐在生成代码前，使用 `--json` 参数批量验证图标是否存在。
 
 ```bash
-npx taro-lucide-find arrow-up user settings arw --json
+pnpm dlx taro-lucide-find arrow-up user settings arw --json
 ```
 
 **输出示例：**
@@ -143,13 +143,13 @@ npx taro-lucide-find arrow-up user settings arw --json
 支持一次性生成所有 TabBar 图标。
 
 ```bash
-npx taro-lucide-tabbar House Settings User -c "#999999" -a "#1890ff"
+pnpm dlx taro-lucide-tabbar House Settings User -c "#999999" -a "#1890ff"
 ```
 
 ### 指定输出目录和尺寸
 
 ```bash
-npx taro-lucide-tabbar House Settings User -c "#999999" -a "#1890ff" -o ./src/assets/tabbar -s 81
+pnpm dlx taro-lucide-tabbar House Settings User -c "#999999" -a "#1890ff" -o ./src/assets/tabbar -s 81
 ```
 
 ### CLI 参数

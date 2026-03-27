@@ -1,4 +1,5 @@
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { CommandTabs } from "@/components/ui/CommandTabs";
 
 export default function CliPage() {
   return (
@@ -15,22 +16,15 @@ export default function CliPage() {
             微信小程序的 TabBar 不支持 base64 或 SVG 图片，只能使用本地 PNG 文件。
             使用独立发布的 <code>taro-lucide-tabbar</code> 即可一键生成这些 PNG 图标。
           </p>
-          <CodeBlock
-            language="bash"
-            code={`# 查看命令帮助
-npx taro-lucide-tabbar --help
-
-# 生成单个图标
-npx taro-lucide-tabbar House -c "#999999"
-
-# 生成带选中状态的图标（推荐）
-npx taro-lucide-tabbar House -c "#999999" -a "#1890ff"
-
-# 批量生成多个图标
-npx taro-lucide-tabbar House Settings User -c "#999999" -a "#1890ff"
-
-# 指定输出目录和尺寸（小程序推荐 81x81）
-npx taro-lucide-tabbar House -c "#999999" -o ./src/assets/tabbar -s 81`}
+          <CommandTabs
+            packageName="taro-lucide-tabbar"
+            commands={[
+              '--help',
+              'House -c "#999999"',
+              'House -c "#999999" -a "#1890ff"',
+              'House Settings User -c "#999999" -a "#1890ff"',
+              'House -c "#999999" -o ./src/assets/tabbar -s 81',
+            ]}
           />
         </div>
 
@@ -39,16 +33,13 @@ npx taro-lucide-tabbar House -c "#999999" -o ./src/assets/tabbar -s 81`}
           <p className="mb-4 text-foreground/90">
             使用独立发布的 <code>taro-lucide-show</code> 在终端中直接预览图标。
           </p>
-          <CodeBlock
-            language="bash"
-            code={`# 查看命令帮助
-npx taro-lucide-show --help
-
-# 预览图标
-npx taro-lucide-show arrow-up
-
-# 指定尺寸和颜色
-npx taro-lucide-show arrow-up -s 60 -c "#ff0000"`}
+          <CommandTabs
+            packageName="taro-lucide-show"
+            commands={[
+              '--help',
+              'arrow-up',
+              'arrow-up -s 60 -c "#ff0000"',
+            ]}
           />
         </div>
 
@@ -57,19 +48,14 @@ npx taro-lucide-show arrow-up -s 60 -c "#ff0000"`}
           <p className="mb-4 text-foreground/90">
             使用独立发布的 <code>taro-lucide-find</code> 在命令行中直接查找图标，或通过代码批量验证。
           </p>
-          <CodeBlock
-            language="bash"
-            code={`# 查看命令帮助
-npx taro-lucide-find --help
-
-# 模糊查找
-npx taro-lucide-find arrow
-
-# 精确查找
-npx taro-lucide-find arrow-up --exact
-
-# JSON 格式输出（非常适合 AI 助手调用）
-npx taro-lucide-find arrow-up user settings arw --json`}
+          <CommandTabs
+            packageName="taro-lucide-find"
+            commands={[
+              '--help',
+              'arrow',
+              'arrow-up --exact',
+              'arrow-up user settings arw --json',
+            ]}
           />
         </div>
       </section>
