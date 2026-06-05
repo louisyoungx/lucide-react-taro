@@ -9,6 +9,54 @@ function svgToDataUrl(svg: string): string {
 
 const svgCache = new Map<string, string>();
 
+// Case-insensitive `var(` keyword; the fallback uses `.+` (not `[^)]+`) so a
+// function-valued fallback like `var(--x, rgb(1,2,3))` is captured intact.
+const cssVarPattern = /^var\(\s*(--[\w-]+)\s*(?:,\s*(.+))?\)$/i;
+
+// Own-property check (not `in`) so a color like "toString"/"constructor" can't
+// resolve to an inherited Object.prototype member. hasOwnProperty.call is used
+// instead of Object.hasOwn for older mini-program runtimes.
+function hasOwn(obj: Record<string, string>, key: string): boolean {
+  return Object.prototype.hasOwnProperty.call(obj, key);
+}
+
+/**
+ * 将 color 输入解析为字面量颜色。weapp 无法在 data-URI 的 <Image> 内解析 CSS 变量，
+ * 因此在渲染时解析为字面量。字面量颜色（hex/rgb()/具名）原样透传以保持向后兼容。
+ */
+export function resolveIconColor(
+  input: string | undefined,
+  config: {
+    resolveColor?: (i: string) => string | undefined;
+    themeColors?: Record<string, string>;
+    cssVars?: Record<string, string>;
+  }
+): string | undefined {
+  if (!input) return input;
+
+  const custom = config.resolveColor?.(input);
+  if (typeof custom === 'string') return custom;
+
+  const cssVarMatch = input.trim().match(cssVarPattern);
+  if (cssVarMatch) {
+    const [, varName, fallback] = cssVarMatch;
+    const cssVars = config.cssVars;
+    if (cssVars) {
+      const bare = varName.replace(/^--/, '');
+      if (hasOwn(cssVars, varName)) return cssVars[varName];
+      if (hasOwn(cssVars, bare)) return cssVars[bare];
+    }
+    if (fallback !== undefined) return fallback.trim();
+    return input;
+  }
+
+  if (config.themeColors && hasOwn(config.themeColors, input)) {
+    return config.themeColors[input];
+  }
+
+  return input;
+}
+
 export function createIcon(svgTemplate: string, iconName?: string) {
   const IconComponent: React.FC<IconProps> = ({
     size: sizeProp,
@@ -20,9 +68,10 @@ export function createIcon(svgTemplate: string, iconName?: string) {
     style,
     ...props
   }: IconProps) => {
-    const { defaultColor, defaultSize } = useContext(LucideTaroContext);
+    const { defaultColor, defaultSize, themeColors, cssVars, resolveColor } = useContext(LucideTaroContext);
     const size = sizeProp === 'inherit' ? (defaultSize ?? 24) : (sizeProp ?? defaultSize ?? 24);
-    const color = (colorProp && colorProp !== 'inherit') ? colorProp : defaultColor;
+    const rawColor = (colorProp && colorProp !== 'inherit') ? colorProp : defaultColor;
+    const color = resolveIconColor(rawColor, { resolveColor, themeColors, cssVars });
 
     const src = useMemo(() => {
       const cacheKey = `${color}|${filled}|${strokeWidth}|${absoluteStrokeWidth}|${size}`;

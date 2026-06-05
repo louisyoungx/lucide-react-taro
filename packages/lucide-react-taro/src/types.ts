@@ -18,6 +18,16 @@ export interface DefaultIconProps {
   color?: string;
 }
 
+/** 自定义颜色解析器：传入 color 输入，返回字面量颜色，或 undefined 表示不处理 */
+export type ColorResolver = (input: string) => string | undefined;
+
+/** 主题颜色解析配置，与 LucideTaroProvider 的相关字段保持一致 */
+export interface ThemeColorConfig {
+  themeColors?: Record<string, string>;
+  cssVars?: Record<string, string>;
+  resolveColor?: ColorResolver;
+}
+
 export type IconProps = Omit<ImageProps, 'src' | 'style'> & {
   filled?: boolean;
   strokeWidth?: number | string;

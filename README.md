@@ -121,7 +121,29 @@ import { LucideTaroProvider, House, Settings, Camera } from 'lucide-react-taro';
 </LucideTaroProvider>
 ```
 
-> **注意**：由于小程序端 SVG 是通过 Data URL 渲染的，图标无法从 CSS 继承父元素的文字颜色（`currentColor` 会回退为黑色）。建议通过 `LucideTaroProvider` 或 `color` prop 显式指定颜色。
+> **注意**：由于小程序端 SVG 是通过 Data URL 渲染的，图标无法从 CSS 继承父元素的文字颜色（`currentColor` 会回退为黑色）。请通过 `LucideTaroProvider` 或 `color` prop 显式指定颜色，或使用下方的主题颜色解析。
+
+#### 主题颜色与 CSS 变量解析（themeColors / cssVars / resolveColor）
+
+因为图标在渲染时就要把颜色烘焙进 Data URL，`color` 无法在运行时解析页面的 CSS 变量（`var(--x)`）。`LucideTaroProvider` 支持在渲染前把主题 token / CSS 变量解析为字面量颜色：
+
+```tsx
+import { LucideTaroProvider, House, Settings, Camera } from 'lucide-react-taro';
+
+<LucideTaroProvider
+  themeColors={{ primary: '#00b9ca', danger: '#f53f3f' }}
+  cssVars={{ '--color-primary': '#00b9ca' }}
+>
+  <House color="primary" />                  {/* 解析为 #00b9ca */}
+  <Settings color="var(--color-primary)" />  {/* 解析为 #00b9ca */}
+  <Camera color="#1890ff" />                 {/* 字面量原样使用 */}
+</LucideTaroProvider>
+```
+
+- `themeColors`：`token -> 字面量颜色` 映射；`color="token"` 命中后替换为字面量。
+- `cssVars`：`CSS 变量 -> 字面量颜色` 映射（键可带或不带 `--`）；`color="var(--x)"` 命中后替换，`var(--x, #fallback)` 支持回退值。
+- `resolveColor(input) => string | undefined`：自定义解析器，优先级最高。
+- 任意字面量颜色（hex / `rgb()` / 具名）始终原样透传，完全向后兼容。
 
 ## API
 
