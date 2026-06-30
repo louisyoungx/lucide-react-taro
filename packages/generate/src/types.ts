@@ -4,7 +4,7 @@ export type IconDefinition = {
   svgContent: string
 }
 
-export type CliOptions = Record<string, string>
+export type CliOptions = Record<string, string | undefined>
 
 export type PackageJsonLike = {
   dependencies?: Record<string, string>

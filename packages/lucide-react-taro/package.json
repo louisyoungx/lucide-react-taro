@@ -22,13 +22,13 @@
     "dist"
   ],
   "scripts": {
-    "fetch-icons": "lucide-react-taro-generate fetch-icons --package-dir .",
+    "fetch-icons": "lucide-react-taro-generate fetch-icons --package-dir . --lucide-ref 1.17.0",
     "generate": "lucide-react-taro-generate generate-icons --package-dir .",
     "build:bundle": "lucide-react-taro-generate build-lib --package-dir .",
     "build": "npm run fetch-icons && npm run generate && npm run build:bundle",
-    "clean": "rm -rf dist src/icons src/index.ts e2e",
+    "clean": "rm -rf dist src/icons src/index.ts src/lucide-version.ts e2e",
     "prepublishOnly": "npm run build",
-    "test": "npm run build && vitest run src/__tests__/Icon.test.tsx src/__tests__/generate.test.ts src/__tests__/strict-props-e2e.test.ts src/__tests__/tree-shaking-e2e.test.ts",
+    "test": "npm run build && vitest run src/__tests__/Icon.test.tsx src/__tests__/aliases.test.tsx src/__tests__/generate.test.ts src/__tests__/strict-props-e2e.test.ts src/__tests__/tree-shaking-e2e.test.ts",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
   },

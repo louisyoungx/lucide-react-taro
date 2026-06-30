@@ -389,6 +389,10 @@ export const iconList = [
     "componentName": "Asterisk"
   },
   {
+    "name": "astroid",
+    "componentName": "Astroid"
+  },
+  {
     "name": "at-sign",
     "componentName": "AtSign"
   },
@@ -617,6 +621,10 @@ export const iconList = [
     "componentName": "Beer"
   },
   {
+    "name": "bell-check",
+    "componentName": "BellCheck"
+  },
+  {
     "name": "bell-dot",
     "componentName": "BellDot"
   },
@@ -695,6 +703,10 @@ export const iconList = [
   {
     "name": "blend",
     "componentName": "Blend"
+  },
+  {
+    "name": "blender",
+    "componentName": "Blender"
   },
   {
     "name": "blinds",
@@ -849,6 +861,10 @@ export const iconList = [
     "componentName": "BookmarkMinus"
   },
   {
+    "name": "bookmark-off",
+    "componentName": "BookmarkOff"
+  },
+  {
     "name": "bookmark-plus",
     "componentName": "BookmarkPlus"
   },
@@ -943,6 +959,10 @@ export const iconList = [
   {
     "name": "bring-to-front",
     "componentName": "BringToFront"
+  },
+  {
+    "name": "broccoli",
+    "componentName": "Broccoli"
   },
   {
     "name": "brush-cleaning",
@@ -2657,6 +2677,10 @@ export const iconList = [
     "componentName": "FolderArchive"
   },
   {
+    "name": "folder-bookmark",
+    "componentName": "FolderBookmark"
+  },
+  {
     "name": "folder-check",
     "componentName": "FolderCheck"
   },
@@ -2953,6 +2977,10 @@ export const iconList = [
     "componentName": "Glasses"
   },
   {
+    "name": "globe-check",
+    "componentName": "GlobeCheck"
+  },
+  {
     "name": "globe-lock",
     "componentName": "GlobeLock"
   },
@@ -3179,6 +3207,10 @@ export const iconList = [
   {
     "name": "heart-pulse",
     "componentName": "HeartPulse"
+  },
+  {
+    "name": "heart-x",
+    "componentName": "HeartX"
   },
   {
     "name": "heart",
@@ -3435,6 +3467,10 @@ export const iconList = [
   {
     "name": "layers-2",
     "componentName": "Layers2"
+  },
+  {
+    "name": "layers-minus",
+    "componentName": "LayersMinus"
   },
   {
     "name": "layers-plus",
@@ -4453,6 +4489,10 @@ export const iconList = [
     "componentName": "Paperclip"
   },
   {
+    "name": "parasol",
+    "componentName": "Parasol"
+  },
+  {
     "name": "parentheses",
     "componentName": "Parentheses"
   },
@@ -4879,6 +4919,10 @@ export const iconList = [
   {
     "name": "repeat-2",
     "componentName": "Repeat2"
+  },
+  {
+    "name": "repeat-off",
+    "componentName": "RepeatOff"
   },
   {
     "name": "repeat",
@@ -5613,6 +5657,10 @@ export const iconList = [
     "componentName": "SquareDashedMousePointer"
   },
   {
+    "name": "square-dashed-text",
+    "componentName": "SquareDashedText"
+  },
+  {
     "name": "square-dashed-top-solid",
     "componentName": "SquareDashedTopSolid"
   },
@@ -5825,8 +5873,32 @@ export const iconList = [
     "componentName": "Sticker"
   },
   {
+    "name": "sticky-note-check",
+    "componentName": "StickyNoteCheck"
+  },
+  {
+    "name": "sticky-note-minus",
+    "componentName": "StickyNoteMinus"
+  },
+  {
+    "name": "sticky-note-off",
+    "componentName": "StickyNoteOff"
+  },
+  {
+    "name": "sticky-note-plus",
+    "componentName": "StickyNotePlus"
+  },
+  {
+    "name": "sticky-note-x",
+    "componentName": "StickyNoteX"
+  },
+  {
     "name": "sticky-note",
     "componentName": "StickyNote"
+  },
+  {
+    "name": "sticky-notes",
+    "componentName": "StickyNotes"
   },
   {
     "name": "stone",
@@ -6053,10 +6125,6 @@ export const iconList = [
     "componentName": "TextSearch"
   },
   {
-    "name": "text-select",
-    "componentName": "TextSelect"
-  },
-  {
     "name": "text-wrap",
     "componentName": "TextWrap"
   },
@@ -6119,6 +6187,10 @@ export const iconList = [
   {
     "name": "tickets",
     "componentName": "Tickets"
+  },
+  {
+    "name": "timeline",
+    "componentName": "Timeline"
   },
   {
     "name": "timer-off",
@@ -6597,12 +6669,16 @@ export const iconList = [
     "componentName": "WavesArrowUp"
   },
   {
+    "name": "waves-horizontal",
+    "componentName": "WavesHorizontal"
+  },
+  {
     "name": "waves-ladder",
     "componentName": "WavesLadder"
   },
   {
-    "name": "waves",
-    "componentName": "Waves"
+    "name": "waves-vertical",
+    "componentName": "WavesVertical"
   },
   {
     "name": "waypoints",

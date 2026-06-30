@@ -9,7 +9,7 @@ async function main() {
 
   if (!command) {
     fail(
-      'Usage: lucide-react-taro-generate <fetch-icons|generate-icons|build-lib|build-cli> --package-dir <dir> [options]',
+      'Usage: lucide-react-taro-generate <fetch-icons|generate-icons|build-lib|build-cli> --package-dir <dir> [--lucide-ref <tag|branch|sha>] [options]',
     )
   }
 
@@ -17,7 +17,7 @@ async function main() {
 
   switch (command) {
     case 'fetch-icons':
-      await fetchIcons(packageDir)
+      await fetchIcons(packageDir, options['lucide-ref'])
       break
     case 'generate-icons':
       await generateIcons(packageDir)

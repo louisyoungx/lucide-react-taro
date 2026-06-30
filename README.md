@@ -45,6 +45,8 @@ npx skills add louisyoungx/lucide-react-taro
 - **TypeScript 支持**：完整的类型定义
 - **与 lucide-react 一致的 API**：支持 `size`、`color`、`strokeWidth`、`absoluteStrokeWidth` 等属性
 - **实心图标支持**：通过 `filled` 渲染实心图标（如 Heart）
+- **别名导出**：lucide 的别名（如 `Grid` → `Grid3x3`）也会生成导出，重命名/废弃名称仍可正常导入；并对齐 lucide-react，为每个图标额外导出带 `Icon` 后缀的同名别名（`House` → `HouseIcon`，二者完全等价）
+- **可复现的图标版本**：图标集固定到指定 lucide 版本（tag），并导出 `LUCIDE_VERSION` / `LUCIDE_COMMIT` 标记来源
 - **CLI 工具**：支持生成小程序 TabBar 所需的 PNG 图标
 
 ## 安装
@@ -274,12 +276,23 @@ pnpm dlx taro-lucide-show Heart -c "#ff3e98" -s 30
 # 安装依赖
 npm install
 
-# 完整构建
+# 完整构建（拉取 lucide 图标 → 生成 → 打包）
 npm run build
 
 # 运行测试
 npm test
 ```
+
+图标集从上游 lucide 仓库生成，并固定到某个 lucide 版本（tag）以保证可复现：
+
+```bash
+# 在 packages/lucide-react-taro 下：
+pnpm fetch-icons   # 默认 --lucide-ref 1.17.0（见该包 package.json 脚本）
+pnpm generate      # 重新生成图标、别名与 lucide-version.ts
+# 临时指定其他版本：lucide-react-taro-generate fetch-icons --package-dir . --lucide-ref <tag|branch|sha>
+```
+
+升级 lucide 时修改 `fetch-icons` 脚本中的 `--lucide-ref` 即可；生成的 `src/lucide-version.ts` 会记录对应版本与提交，便于审计。
 
 ### 项目结构
 
